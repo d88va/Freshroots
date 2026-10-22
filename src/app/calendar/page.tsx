@@ -84,7 +84,7 @@ export default async function Calendar() {
       <p className="muted" style={{ marginTop: 0 }}>Where the history differs sharply from the active factor. These are suggestions to think about, not changes. Nothing is applied until Raghav changes a rule himself.</p>
       {gaps.length === 0 && <div className="card empty">No month differs from its active factor by {threshold} or more.</div>}
       {gaps.slice(0, 9).map((g) => (
-        <div key={`${g.category}-${g.month}`} className="flagcard" style={{ borderLeftColor: g.direction === "above" ? "var(--warn)" : "var(--info)" }}>
+        <div key={`${g.category}-${g.month}`} className="flagcard">
           <div className="head"><h3>{g.category} in {FULL[g.month - 1]}</h3><span className={`pill ${g.direction === "above" ? "warn" : "info"}`}>{g.direction === "above" ? "busier" : "quieter"} than the factor allows</span></div>
           <p style={{ margin: "0 0 6px" }}>
             Demand has typically run <strong>{g.index}x</strong> a normal month. The rules apply <strong>{g.active}x</strong> in {FULL[g.month - 1]} ({g.gap > 0 ? "+" : ""}{g.gap.toFixed(2)}).

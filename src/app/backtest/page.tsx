@@ -54,7 +54,7 @@ export default async function Backtest() {
       <h1>Backtest</h1>
       <p className="lead">Kill switch K2: replay the rules over 3 years of history. Would they have flagged each past stockout and write-off before it happened?</p>
 
-      <div className="card" style={{ borderLeft: `6px solid var(${red ? "--bad" : "--good"})` }}>
+      <div className="card">
         <div style={{ fontSize: "2.4rem", fontWeight: 700, color: `var(${red ? "--bad" : "--good"})` }}>{s.caught_pct}%</div>
         <div>
           of {s.events_tested.toLocaleString()} past stockouts and write-offs were flagged at least {s.params.min_lead_weeks} week before they happened

@@ -23,7 +23,7 @@ export default function ApproveAll({ s }: { s: BulkSummary }) {
 
   return (
     <>
-      <button onClick={() => dialog.current?.showModal()}>Approve all {s.ids.length} standard flags…</button>
+      <button className="secondary" onClick={() => dialog.current?.showModal()}>Approve all {s.ids.length} standard flags…</button>
       <dialog ref={dialog}>
         <h2 style={{ marginTop: 0 }}>Approve {s.ids.length} flags?</h2>
         <p>This approves every flag below the line exactly as the rules recommend, without changes:</p>

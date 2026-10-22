@@ -37,7 +37,7 @@ export default function SuggestionCard({ s, current }: { s: SuggestionView; curr
   const ev = s.evidence;
 
   return (
-    <div className="flagcard" style={{ borderLeftColor: s.kind === "override_rate" ? "var(--warn)" : "var(--info)" }}>
+    <div className="flagcard">
       <div className="head">
         <h3>{s.title}</h3>
         <span className={`pill ${s.kind === "override_rate" ? "warn" : "info"}`}>{s.kind === "override_rate" ? "Rule overridden often" : "Reason keeps recurring"}</span>

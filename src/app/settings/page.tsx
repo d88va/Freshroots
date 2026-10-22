@@ -24,7 +24,7 @@ export default async function Settings() {
       <h1>Settings</h1>
       <p className="lead">Every threshold the system uses is here. Only you change them, each change needs a reason, and each one is logged.</p>
 
-      <h2 style={{ marginTop: 8 }}>Pause system</h2>
+      <h2 style={{ marginTop: 28 }}>System</h2>
       <PauseCard paused={state.paused} since={state.paused_at} why={state.paused_reason} />
 
       <h2>Rules (current version {latestVersion.v})</h2>

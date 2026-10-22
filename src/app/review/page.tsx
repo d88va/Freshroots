@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { getSql } from "@/lib/db/client";
 import { needsOwnDecision } from "@/lib/review/decide";
 import { pendingFlags } from "@/lib/review/data";
 import ApproveAll from "./ApproveAll";
-import FlagCard from "./FlagCard";
+import ReviewList from "./ReviewList";
 
 export const dynamic = "force-dynamic";
 
@@ -20,45 +19,21 @@ export default async function Review() {
     pauses: standard.length - reorders.length,
     judgment: own.length,
   };
-  const aiPending = flags.filter((f) => f.reason_fallback === "not_yet").length;
+  const waiting = flags.filter((f) => f.reason_fallback === "not_yet").length;
 
   return (
     <>
-      <h1>Review flags</h1>
-      <p className="lead">Nothing is ordered until you approve it. Approve, edit the quantity, or override with a reason.</p>
-
-      <div className="pills">
-        <span className="pill">{flags.length} pending</span>
-        {urgent > 0 && <span className="pill bad">{urgent} urgent</span>}
-        <span className="pill info">{own.length} need your judgment</span>
-        {aiPending > 0 && <span className="pill warn">{aiPending} reasons still being written</span>}
-      </div>
-
-      {flags.length === 0 && (
-        <div className="card empty">
-          <strong>Nothing to review.</strong>
-          <p>Flags appear after a run. See <Link href="/orders">Orders</Link> for what you have approved.</p>
+      <div className="row" style={{ justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div>
+          <h1>Review</h1>
+          <p className="lead" style={{ margin: "4px 0 0" }}>
+            {flags.length} flag{flags.length === 1 ? "" : "s"} to decide{urgent ? `, ${urgent} urgent` : ""}. Nothing is ordered until you approve it.
+            {waiting ? ` ${waiting} reasons are still template text while the AI catches up.` : ""}
+          </p>
         </div>
-      )}
-
-      {standard.length > 0 && (
-        <>
-          <div className="sectionhead">
-            <h2>Flags to review ({standard.length})</h2>
-            <ApproveAll s={bulk} />
-          </div>
-          <p className="muted" style={{ marginTop: 0 }}>Most urgent first. “Approve all” never includes the judgment cases below.</p>
-          {standard.map((f) => <FlagCard key={f.id} flag={f} />)}
-        </>
-      )}
-
-      {own.length > 0 && (
-        <>
-          <div className="sectionhead"><h2>Needs your judgment ({own.length})</h2></div>
-          <p className="muted" style={{ marginTop: 0 }}>New launches, gaps in the data, unusual swings, or flags where the rules disagree. The system recommends no quantity. Decide one at a time.</p>
-          {own.map((f) => <FlagCard key={f.id} flag={f} />)}
-        </>
-      )}
+        <ApproveAll s={bulk} />
+      </div>
+      <ReviewList standard={standard} own={own} />
     </>
   );
 }
