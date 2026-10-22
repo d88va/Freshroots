@@ -1,0 +1,401 @@
+sku_id,name,category,is_perishable,standard_order_qty,launch_date
+FR-001,Salted Farsan Mix 400g,Namkeen & Snacks,false,6180,2022-09-08
+FR-002,Classic Sev 200g,Namkeen & Snacks,false,2750,2019-12-01
+FR-003,Masala Peanuts 400g,Namkeen & Snacks,false,1830,2018-01-01
+FR-004,Spicy Bhujia 200g,Namkeen & Snacks,false,1780,2020-08-17
+FR-005,Masala Farsan Mix 150g,Namkeen & Snacks,false,2600,2020-02-05
+FR-006,Spicy Banana Chips 400g,Namkeen & Snacks,false,490,2018-04-19
+FR-007,Masala Khakhra 400g,Namkeen & Snacks,false,3870,2018-09-26
+FR-008,Masala Sev 400g,Namkeen & Snacks,false,3190,2022-05-30
+FR-009,Spicy Mathri 400g,Namkeen & Snacks,false,2880,2018-08-29
+FR-010,Salted Bhujia 150g,Namkeen & Snacks,false,1520,2021-08-03
+FR-011,Spicy Farsan Mix 400g,Namkeen & Snacks,false,1430,2021-07-26
+FR-012,Masala Bhujia 400g,Namkeen & Snacks,false,680,2021-08-24
+FR-013,Classic Banana Chips 400g,Namkeen & Snacks,false,5970,2022-11-16
+FR-014,Classic Farsan Mix 400g,Namkeen & Snacks,false,930,2020-01-12
+FR-015,Jumbo Mathri 400g,Namkeen & Snacks,false,860,2019-08-02
+FR-016,Salted Banana Chips 400g,Namkeen & Snacks,false,1130,2022-09-16
+FR-017,Tangy Chivda 400g,Namkeen & Snacks,false,12370,2019-12-14
+FR-018,Jumbo Sev 400g,Namkeen & Snacks,false,2380,2019-09-11
+FR-019,Masala Mathri 200g,Namkeen & Snacks,false,690,2020-04-12
+FR-020,Spicy Sev 150g,Namkeen & Snacks,false,3440,2022-08-27
+FR-021,Masala Peanuts 400g,Namkeen & Snacks,false,630,2019-06-05
+FR-022,Masala Peanuts 150g,Namkeen & Snacks,false,4060,2020-01-18
+FR-023,Classic Sev 150g,Namkeen & Snacks,false,1410,2020-08-23
+FR-024,Classic Chivda 150g,Namkeen & Snacks,false,1120,2022-05-27
+FR-025,Tangy Khakhra 400g,Namkeen & Snacks,false,750,2018-03-24
+FR-026,Classic Chivda 150g,Namkeen & Snacks,false,1670,2018-08-18
+FR-027,Jumbo Farsan Mix 150g,Namkeen & Snacks,false,9810,2019-04-12
+FR-028,Spicy Chivda 400g,Namkeen & Snacks,false,2780,2022-01-08
+FR-029,Classic Peanuts 150g,Namkeen & Snacks,false,780,2018-03-14
+FR-030,Salted Peanuts 150g,Namkeen & Snacks,false,610,2018-07-07
+FR-031,Jumbo Khakhra 200g,Namkeen & Snacks,false,5490,2021-01-10
+FR-032,Tangy Peanuts 150g,Namkeen & Snacks,false,540,2022-06-18
+FR-033,Jumbo Chivda 400g,Namkeen & Snacks,false,790,2021-06-27
+FR-034,Salted Chivda 200g,Namkeen & Snacks,false,1970,2019-07-21
+FR-035,Masala Banana Chips 200g,Namkeen & Snacks,false,980,2022-05-05
+FR-036,Spicy Farsan Mix 200g,Namkeen & Snacks,false,1820,2020-09-18
+FR-037,Classic Peanuts 400g,Namkeen & Snacks,false,200,2020-03-29
+FR-038,Classic Mathri 400g,Namkeen & Snacks,false,5620,2021-03-01
+FR-039,Jumbo Bhujia 400g,Namkeen & Snacks,false,2400,2021-08-30
+FR-040,Tangy Bhujia 200g,Namkeen & Snacks,false,1160,2019-03-29
+FR-041,Tangy Bhujia 150g,Namkeen & Snacks,false,1730,2018-05-17
+FR-042,Jumbo Farsan Mix 200g,Namkeen & Snacks,false,2130,2022-04-04
+FR-043,Jumbo Sev 400g,Namkeen & Snacks,false,480,2019-10-03
+FR-044,Spicy Sev 400g,Namkeen & Snacks,false,1370,2021-06-22
+FR-045,Spicy Khakhra 200g,Namkeen & Snacks,false,870,2021-03-22
+FR-046,Salted Banana Chips 150g,Namkeen & Snacks,false,2440,2020-12-09
+FR-047,Masala Sev 200g,Namkeen & Snacks,false,700,2022-01-20
+FR-048,Tangy Banana Chips 400g,Namkeen & Snacks,false,1270,2020-01-02
+FR-049,Spicy Khakhra 200g,Namkeen & Snacks,false,3140,2022-11-14
+FR-050,Masala Bhujia 200g,Namkeen & Snacks,false,410,2020-02-19
+FR-051,Tangy Bhujia 200g,Namkeen & Snacks,false,2470,2020-08-06
+FR-052,Classic Chivda 400g,Namkeen & Snacks,false,690,2018-11-21
+FR-053,Classic Mathri 150g,Namkeen & Snacks,false,2540,2021-01-03
+FR-054,Salted Bhujia 200g,Namkeen & Snacks,false,2420,2018-10-08
+FR-055,Spicy Peanuts 150g,Namkeen & Snacks,false,1680,2020-04-11
+FR-056,Classic Khakhra 200g,Namkeen & Snacks,false,7590,2019-07-02
+FR-057,Classic Bhujia 150g,Namkeen & Snacks,false,1540,2019-02-14
+FR-058,Tangy Khakhra 200g,Namkeen & Snacks,false,4190,2021-01-13
+FR-059,Masala Khakhra 150g,Namkeen & Snacks,false,1430,2022-01-19
+FR-060,Tangy Banana Chips 400g,Namkeen & Snacks,false,670,2018-10-13
+FR-061,Spicy Banana Chips 400g,Namkeen & Snacks,false,2880,2019-04-30
+FR-062,Jumbo Farsan Mix 200g,Namkeen & Snacks,false,2920,2019-08-26
+FR-063,Masala Mathri 200g,Namkeen & Snacks,false,740,2022-01-17
+FR-064,Classic Khakhra 400g,Namkeen & Snacks,false,860,2022-01-05
+FR-065,Tangy Chivda 400g,Namkeen & Snacks,false,1570,2021-04-26
+FR-066,Salted Khakhra 200g,Namkeen & Snacks,false,880,2018-09-12
+FR-067,Tangy Farsan Mix 400g,Namkeen & Snacks,false,1720,2020-06-09
+FR-068,Classic Mathri 150g,Namkeen & Snacks,false,250,2018-10-01
+FR-069,Tangy Chivda 400g,Namkeen & Snacks,false,1600,2018-12-11
+FR-070,Tangy Khakhra 200g,Namkeen & Snacks,false,550,2020-09-07
+FR-071,Tangy Bhujia 200g,Namkeen & Snacks,false,1300,2020-02-19
+FR-072,Masala Peanuts 200g,Namkeen & Snacks,false,1890,2022-01-27
+FR-073,Masala Chivda 200g,Namkeen & Snacks,false,620,2022-04-29
+FR-074,Jumbo Bhujia 200g,Namkeen & Snacks,false,1600,2018-10-09
+FR-075,Masala Sev 150g,Namkeen & Snacks,false,2630,2021-12-25
+FR-076,Spicy Chivda 400g,Namkeen & Snacks,false,1700,2018-06-23
+FR-077,Tangy Peanuts 150g,Namkeen & Snacks,false,980,2020-10-04
+FR-078,Masala Khakhra 200g,Namkeen & Snacks,false,2130,2022-04-03
+FR-079,Salted Khakhra 400g,Namkeen & Snacks,false,2760,2021-03-03
+FR-080,Salted Chivda 200g,Namkeen & Snacks,false,2700,2018-01-25
+FR-081,Family Pack Glucose Biscuits 500g,Biscuits & Cookies,false,3420,2018-10-20
+FR-082,Elaichi Marie 250g,Biscuits & Cookies,false,3490,2019-06-24
+FR-083,Mini Cookies 100g,Biscuits & Cookies,false,3230,2021-12-19
+FR-084,Classic Cookies 100g,Biscuits & Cookies,false,810,2021-08-01
+FR-085,Classic Glucose Biscuits 250g,Biscuits & Cookies,false,3760,2021-06-22
+FR-086,Classic Digestive 100g,Biscuits & Cookies,false,2610,2018-08-24
+FR-087,Mini Rusk 500g,Biscuits & Cookies,false,5800,2021-09-05
+FR-088,Mini Marie 250g,Biscuits & Cookies,false,1290,2022-03-31
+FR-089,Elaichi Cookies 500g,Biscuits & Cookies,false,2700,2021-09-05
+FR-090,Elaichi Rusk 250g,Biscuits & Cookies,false,2570,2020-06-27
+FR-091,Mini Rusk 500g,Biscuits & Cookies,false,2260,2021-02-12
+FR-092,Classic Digestive 250g,Biscuits & Cookies,false,1390,2019-01-04
+FR-093,Elaichi Marie 500g,Biscuits & Cookies,false,2060,2022-04-17
+FR-094,Choco Digestive 250g,Biscuits & Cookies,false,1680,2020-12-09
+FR-095,Family Pack Marie 500g,Biscuits & Cookies,false,2800,2020-03-07
+FR-096,Classic Rusk 100g,Biscuits & Cookies,false,1470,2021-05-11
+FR-097,Family Pack Rusk 250g,Biscuits & Cookies,false,1870,2019-02-11
+FR-098,Family Pack Cream Biscuits 100g,Biscuits & Cookies,false,5620,2021-05-13
+FR-099,Family Pack Rusk 250g,Biscuits & Cookies,false,980,2022-01-31
+FR-100,Elaichi Rusk 100g,Biscuits & Cookies,false,12420,2018-02-27
+FR-101,Elaichi Rusk 500g,Biscuits & Cookies,false,2020,2021-06-16
+FR-102,Classic Cookies 250g,Biscuits & Cookies,false,2220,2018-05-05
+FR-103,Classic Cream Biscuits 250g,Biscuits & Cookies,false,480,2020-03-20
+FR-104,Mini Marie 250g,Biscuits & Cookies,false,1430,2019-12-10
+FR-105,Family Pack Cookies 500g,Biscuits & Cookies,false,3760,2020-03-02
+FR-106,Mini Glucose Biscuits 500g,Biscuits & Cookies,false,1020,2022-04-10
+FR-107,Classic Marie 500g,Biscuits & Cookies,false,1060,2019-03-13
+FR-108,Choco Digestive 250g,Biscuits & Cookies,false,3120,2018-04-27
+FR-109,Choco Marie 500g,Biscuits & Cookies,false,790,2018-03-19
+FR-110,Elaichi Cream Biscuits 100g,Biscuits & Cookies,false,410,2020-02-04
+FR-111,Mini Glucose Biscuits 250g,Biscuits & Cookies,false,850,2022-04-15
+FR-112,Family Pack Digestive 100g,Biscuits & Cookies,false,1790,2020-04-01
+FR-113,Classic Marie 100g,Biscuits & Cookies,false,3270,2022-06-13
+FR-114,Choco Cookies 100g,Biscuits & Cookies,false,1030,2019-11-20
+FR-115,Classic Cookies 500g,Biscuits & Cookies,false,690,2021-08-21
+FR-116,Mini Digestive 250g,Biscuits & Cookies,false,1390,2018-08-16
+FR-117,Mini Cookies 100g,Biscuits & Cookies,false,9140,2018-09-12
+FR-118,Elaichi Marie 100g,Biscuits & Cookies,false,880,2019-12-01
+FR-119,Mini Digestive 100g,Biscuits & Cookies,false,4200,2020-10-07
+FR-120,Family Pack Rusk 500g,Biscuits & Cookies,false,740,2018-12-02
+FR-121,Family Pack Marie 100g,Biscuits & Cookies,false,5990,2021-08-27
+FR-122,Choco Cookies 500g,Biscuits & Cookies,false,2110,2022-06-07
+FR-123,Classic Cream Biscuits 250g,Biscuits & Cookies,false,3020,2018-01-29
+FR-124,Choco Cookies 500g,Biscuits & Cookies,false,670,2021-05-13
+FR-125,Elaichi Cream Biscuits 500g,Biscuits & Cookies,false,230,2021-08-11
+FR-126,Choco Cream Biscuits 250g,Biscuits & Cookies,false,2320,2019-01-04
+FR-127,Mini Cream Biscuits 500g,Biscuits & Cookies,false,1510,2020-08-17
+FR-128,Classic Rusk 250g,Biscuits & Cookies,false,480,2020-06-29
+FR-129,Elaichi Digestive 250g,Biscuits & Cookies,false,2370,2018-10-26
+FR-130,Mini Cream Biscuits 100g,Biscuits & Cookies,false,710,2021-04-17
+FR-131,Elaichi Rusk 250g,Biscuits & Cookies,false,580,2021-02-24
+FR-132,Elaichi Cream Biscuits 250g,Biscuits & Cookies,false,1530,2021-06-06
+FR-133,Family Pack Marie 100g,Biscuits & Cookies,false,1210,2022-09-01
+FR-134,Mini Marie 100g,Biscuits & Cookies,false,1280,2021-11-01
+FR-135,Choco Rusk 500g,Biscuits & Cookies,false,640,2018-04-23
+FR-136,Classic Cookies 500g,Biscuits & Cookies,false,850,2021-11-03
+FR-137,Family Pack Digestive 500g,Biscuits & Cookies,false,16000,2018-01-22
+FR-138,Mini Cream Biscuits 100g,Biscuits & Cookies,false,1320,2020-01-18
+FR-139,Mini Digestive 100g,Biscuits & Cookies,false,1920,2020-07-16
+FR-140,Mini Cream Biscuits 100g,Biscuits & Cookies,false,890,2019-11-12
+FR-141,Everyday Chana Dal 10kg,"Atta, Rice & Dal",false,2690,2018-06-07
+FR-142,Premium Moong Dal 1kg,"Atta, Rice & Dal",false,2060,2018-03-29
+FR-143,Everyday Whole Wheat Atta 5kg,"Atta, Rice & Dal",false,4420,2020-09-06
+FR-144,Premium Basmati Rice 1kg,"Atta, Rice & Dal",false,220,2018-03-20
+FR-145,Everyday Toor Dal 1kg,"Atta, Rice & Dal",false,710,2018-09-04
+FR-146,Premium Toor Dal 10kg,"Atta, Rice & Dal",false,1260,2018-08-19
+FR-147,Everyday Toor Dal 1kg,"Atta, Rice & Dal",false,6280,2019-03-30
+FR-148,Everyday Sooji 5kg,"Atta, Rice & Dal",false,460,2019-03-12
+FR-149,Premium Moong Dal 5kg,"Atta, Rice & Dal",false,2710,2018-07-11
+FR-150,Everyday Moong Dal 10kg,"Atta, Rice & Dal",false,1980,2022-05-04
+FR-151,Premium Moong Dal 5kg,"Atta, Rice & Dal",false,1070,2022-02-10
+FR-152,Select Chana Dal 1kg,"Atta, Rice & Dal",false,540,2022-10-30
+FR-153,Everyday Poha 10kg,"Atta, Rice & Dal",false,6100,2019-04-14
+FR-154,Select Poha 5kg,"Atta, Rice & Dal",false,11570,2019-06-29
+FR-155,Premium Chana Dal 1kg,"Atta, Rice & Dal",false,1720,2018-12-08
+FR-156,Select Moong Dal 5kg,"Atta, Rice & Dal",false,4940,2020-10-25
+FR-157,Everyday Chana Dal 10kg,"Atta, Rice & Dal",false,1830,2022-06-10
+FR-158,Premium Basmati Rice 5kg,"Atta, Rice & Dal",false,6060,2019-10-28
+FR-159,Select Basmati Rice 5kg,"Atta, Rice & Dal",false,1920,2019-11-15
+FR-160,Premium Basmati Rice 1kg,"Atta, Rice & Dal",false,3480,2022-08-08
+FR-161,Everyday Chana Dal 1kg,"Atta, Rice & Dal",false,4620,2019-07-21
+FR-162,Premium Chana Dal 1kg,"Atta, Rice & Dal",false,1340,2021-02-16
+FR-163,Everyday Poha 5kg,"Atta, Rice & Dal",false,2020,2020-07-30
+FR-164,Select Moong Dal 1kg,"Atta, Rice & Dal",false,1540,2020-02-24
+FR-165,Select Basmati Rice 10kg,"Atta, Rice & Dal",false,1740,2019-12-17
+FR-166,Select Sooji 1kg,"Atta, Rice & Dal",false,5170,2021-08-31
+FR-167,Select Sooji 10kg,"Atta, Rice & Dal",false,240,2022-01-20
+FR-168,Premium Toor Dal 10kg,"Atta, Rice & Dal",false,5060,2021-08-29
+FR-169,Select Chana Dal 10kg,"Atta, Rice & Dal",false,910,2019-04-06
+FR-170,Select Poha 5kg,"Atta, Rice & Dal",false,1570,2021-08-22
+FR-171,Everyday Whole Wheat Atta 10kg,"Atta, Rice & Dal",false,4310,2018-04-02
+FR-172,Premium Toor Dal 10kg,"Atta, Rice & Dal",false,6950,2018-05-08
+FR-173,Select Moong Dal 10kg,"Atta, Rice & Dal",false,6440,2020-01-07
+FR-174,Select Moong Dal 10kg,"Atta, Rice & Dal",false,1470,2022-02-22
+FR-175,Select Basmati Rice 10kg,"Atta, Rice & Dal",false,790,2019-11-30
+FR-176,Select Toor Dal 5kg,"Atta, Rice & Dal",false,4300,2018-12-09
+FR-177,Everyday Toor Dal 1kg,"Atta, Rice & Dal",false,650,2021-05-21
+FR-178,Everyday Moong Dal 1kg,"Atta, Rice & Dal",false,1090,2018-08-23
+FR-179,Premium Poha 10kg,"Atta, Rice & Dal",false,7270,2022-05-31
+FR-180,Premium Basmati Rice 5kg,"Atta, Rice & Dal",false,2660,2021-06-24
+FR-181,Everyday Chana Dal 10kg,"Atta, Rice & Dal",false,10980,2021-02-17
+FR-182,Select Basmati Rice 10kg,"Atta, Rice & Dal",false,3080,2019-05-11
+FR-183,Everyday Sooji 10kg,"Atta, Rice & Dal",false,2330,2021-07-14
+FR-184,Everyday Whole Wheat Atta 10kg,"Atta, Rice & Dal",false,1610,2021-11-15
+FR-185,Everyday Sooji 10kg,"Atta, Rice & Dal",false,340,2019-01-17
+FR-186,Select Poha 10kg,"Atta, Rice & Dal",false,13680,2021-09-10
+FR-187,Everyday Sooji 5kg,"Atta, Rice & Dal",false,2840,2018-04-02
+FR-188,Premium Moong Dal 1kg,"Atta, Rice & Dal",false,2090,2019-07-13
+FR-189,Premium Chana Dal 10kg,"Atta, Rice & Dal",false,6040,2018-05-04
+FR-190,Everyday Moong Dal 1kg,"Atta, Rice & Dal",false,1040,2021-06-29
+FR-191,Everyday Moong Dal 10kg,"Atta, Rice & Dal",false,1870,2019-07-03
+FR-192,Select Poha 5kg,"Atta, Rice & Dal",false,1540,2019-07-21
+FR-193,Premium Moong Dal 10kg,"Atta, Rice & Dal",false,2160,2022-08-10
+FR-194,Premium Basmati Rice 1kg,"Atta, Rice & Dal",false,2880,2022-09-04
+FR-195,Select Whole Wheat Atta 10kg,"Atta, Rice & Dal",false,2160,2021-03-26
+FR-196,Premium Basmati Rice 1kg,"Atta, Rice & Dal",false,900,2018-11-10
+FR-197,Select Sooji 5kg,"Atta, Rice & Dal",false,550,2019-08-13
+FR-198,Select Sooji 10kg,"Atta, Rice & Dal",false,2130,2020-04-10
+FR-199,Everyday Chana Dal 1kg,"Atta, Rice & Dal",false,3970,2019-01-13
+FR-200,Select Poha 1kg,"Atta, Rice & Dal",false,4310,2019-09-03
+FR-201,Pure Mustard Oil 1L,Edible Oils,false,700,2021-02-20
+FR-202,Cold Pressed Mustard Oil 1L,Edible Oils,false,1550,2018-06-15
+FR-203,Pure Mustard Oil 500ml,Edible Oils,false,480,2019-05-25
+FR-204,Pure Rice Bran Oil 5L,Edible Oils,false,600,2018-11-23
+FR-205,Refined Sunflower Oil 1L,Edible Oils,false,410,2019-02-03
+FR-206,Pure Sunflower Oil 500ml,Edible Oils,false,1650,2021-03-31
+FR-207,Refined Groundnut Oil 1L,Edible Oils,false,3720,2018-05-15
+FR-208,Pure Sunflower Oil 5L,Edible Oils,false,370,2021-02-06
+FR-209,Refined Mustard Oil 5L,Edible Oils,false,750,2020-07-28
+FR-210,Refined Rice Bran Oil 500ml,Edible Oils,false,1060,2021-05-14
+FR-211,Pure Groundnut Oil 5L,Edible Oils,false,1230,2018-06-16
+FR-212,Cold Pressed Rice Bran Oil 1L,Edible Oils,false,1480,2022-09-09
+FR-213,Pure Groundnut Oil 5L,Edible Oils,false,440,2018-05-07
+FR-214,Refined Groundnut Oil 5L,Edible Oils,false,1190,2019-01-21
+FR-215,Pure Rice Bran Oil 1L,Edible Oils,false,360,2021-12-23
+FR-216,Cold Pressed Rice Bran Oil 500ml,Edible Oils,false,2660,2018-04-08
+FR-217,Cold Pressed Sunflower Oil 500ml,Edible Oils,false,1260,2021-05-26
+FR-218,Pure Groundnut Oil 1L,Edible Oils,false,410,2022-06-03
+FR-219,Cold Pressed Sunflower Oil 500ml,Edible Oils,false,1690,2020-03-09
+FR-220,Refined Groundnut Oil 1L,Edible Oils,false,3050,2020-03-07
+FR-221,Pure Rice Bran Oil 500ml,Edible Oils,false,1380,2021-09-15
+FR-222,Refined Rice Bran Oil 1L,Edible Oils,false,1620,2021-09-30
+FR-223,Refined Rice Bran Oil 5L,Edible Oils,false,1020,2019-11-06
+FR-224,Refined Mustard Oil 1L,Edible Oils,false,640,2020-06-05
+FR-225,Pure Mustard Oil 500ml,Edible Oils,false,1500,2022-07-17
+FR-226,Cold Pressed Rice Bran Oil 500ml,Edible Oils,false,540,2019-09-14
+FR-227,Cold Pressed Mustard Oil 1L,Edible Oils,false,2370,2022-11-07
+FR-228,Cold Pressed Rice Bran Oil 1L,Edible Oils,false,2680,2018-08-23
+FR-229,Refined Groundnut Oil 5L,Edible Oils,false,1950,2018-09-27
+FR-230,Pure Mustard Oil 5L,Edible Oils,false,1030,2021-10-12
+FR-231,Zero Coconut Water 250ml,Beverages,false,1920,2022-06-26
+FR-232,Zero Mango Drink 250ml,Beverages,false,1230,2021-09-04
+FR-233,Zero Jeera Soda 1.25L,Beverages,false,1620,2020-08-30
+FR-234,Fresh Mango Drink 1.25L,Beverages,false,1200,2022-03-23
+FR-235,Zero Iced Tea 250ml,Beverages,false,1580,2021-03-09
+FR-236,Fresh Jeera Soda 250ml,Beverages,false,580,2022-06-01
+FR-237,Fresh Jeera Soda 1.25L,Beverages,false,2070,2018-04-21
+FR-238,Fresh Energy Drink 250ml,Beverages,false,570,2022-01-30
+FR-239,Party Pack Iced Tea 250ml,Beverages,false,4920,2019-11-11
+FR-240,Zero Iced Tea 600ml,Beverages,false,760,2022-03-10
+FR-241,Original Iced Tea 600ml,Beverages,false,5560,2022-11-23
+FR-242,Party Pack Coconut Water 1.25L,Beverages,false,1610,2021-02-04
+FR-243,Original Cola 250ml,Beverages,false,1250,2021-06-25
+FR-244,Party Pack Energy Drink 250ml,Beverages,false,2080,2019-12-04
+FR-245,Zero Jeera Soda 250ml,Beverages,false,2820,2018-07-19
+FR-246,Original Cola 600ml,Beverages,false,310,2022-03-14
+FR-247,Fresh Lemon Soda 600ml,Beverages,false,1130,2020-11-10
+FR-248,Original Lemon Soda 600ml,Beverages,false,6030,2019-09-01
+FR-249,Fresh Iced Tea 1.25L,Beverages,false,4810,2022-01-24
+FR-250,Fresh Jeera Soda 250ml,Beverages,false,1950,2019-08-09
+FR-251,Fresh Cola 250ml,Beverages,false,530,2018-09-09
+FR-252,Original Coconut Water 1.25L,Beverages,false,380,2022-09-30
+FR-253,Fresh Iced Tea 250ml,Beverages,false,5470,2022-06-30
+FR-254,Original Jeera Soda 600ml,Beverages,false,370,2020-12-05
+FR-255,Zero Jeera Soda 250ml,Beverages,false,1090,2022-07-10
+FR-256,Original Cola 250ml,Beverages,false,990,2020-11-16
+FR-257,Zero Energy Drink 600ml,Beverages,false,4070,2018-09-30
+FR-258,Party Pack Energy Drink 1.25L,Beverages,false,2270,2022-10-12
+FR-259,Original Energy Drink 1.25L,Beverages,false,1360,2022-10-25
+FR-260,Party Pack Energy Drink 250ml,Beverages,false,1350,2021-04-12
+FR-261,Zero Mango Drink 250ml,Beverages,false,800,2018-08-01
+FR-262,Fresh Lemon Soda 1.25L,Beverages,false,840,2018-07-24
+FR-263,Zero Coconut Water 250ml,Beverages,false,1550,2022-02-13
+FR-264,Fresh Mango Drink 1.25L,Beverages,false,1330,2022-08-23
+FR-265,Party Pack Cola 600ml,Beverages,false,510,2022-01-02
+FR-266,Original Iced Tea 250ml,Beverages,false,1580,2020-01-17
+FR-267,Zero Mango Drink 1.25L,Beverages,false,3850,2021-02-22
+FR-268,Fresh Coconut Water 600ml,Beverages,false,1540,2018-06-26
+FR-269,Party Pack Lemon Soda 600ml,Beverages,false,820,2022-06-13
+FR-270,Fresh Energy Drink 1.25L,Beverages,false,1510,2021-07-02
+FR-271,Classic Red Chilli 200g,Spices & Masalas,false,400,2018-07-16
+FR-272,Kitchen King Garam Masala 100g,Spices & Masalas,false,1260,2021-03-17
+FR-273,Classic Pav Bhaji Masala 200g,Spices & Masalas,false,1050,2022-11-21
+FR-274,Premium Goda Masala 100g,Spices & Masalas,false,3730,2020-02-15
+FR-275,Kitchen King Turmeric 200g,Spices & Masalas,false,520,2022-11-08
+FR-276,Classic Red Chilli 200g,Spices & Masalas,false,570,2019-06-13
+FR-277,Premium Goda Masala 50g,Spices & Masalas,false,1500,2022-04-15
+FR-278,Premium Coriander Powder 50g,Spices & Masalas,false,1520,2018-08-13
+FR-279,Premium Garam Masala 100g,Spices & Masalas,false,1640,2022-05-18
+FR-280,Classic Red Chilli 200g,Spices & Masalas,false,490,2021-05-02
+FR-281,Classic Turmeric 50g,Spices & Masalas,false,250,2020-07-19
+FR-282,Kitchen King Red Chilli 50g,Spices & Masalas,false,1060,2021-02-28
+FR-283,Kitchen King Pav Bhaji Masala 50g,Spices & Masalas,false,570,2018-06-16
+FR-284,Kitchen King Garam Masala 100g,Spices & Masalas,false,1750,2020-01-01
+FR-285,Classic Coriander Powder 200g,Spices & Masalas,false,880,2022-08-29
+FR-286,Premium Red Chilli 200g,Spices & Masalas,false,1170,2020-11-21
+FR-287,Kitchen King Pav Bhaji Masala 200g,Spices & Masalas,false,1880,2020-03-22
+FR-288,Kitchen King Goda Masala 100g,Spices & Masalas,false,680,2018-11-13
+FR-289,Classic Red Chilli 100g,Spices & Masalas,false,1400,2020-05-25
+FR-290,Premium Red Chilli 50g,Spices & Masalas,false,1220,2019-11-11
+FR-291,Classic Pav Bhaji Masala 50g,Spices & Masalas,false,950,2019-04-14
+FR-292,Premium Turmeric 50g,Spices & Masalas,false,890,2020-05-09
+FR-293,Kitchen King Pav Bhaji Masala 100g,Spices & Masalas,false,3760,2022-11-01
+FR-294,Classic Goda Masala 50g,Spices & Masalas,false,1870,2022-07-24
+FR-295,Premium Red Chilli 100g,Spices & Masalas,false,1720,2019-12-14
+FR-296,Kitchen King Turmeric 50g,Spices & Masalas,false,650,2019-03-07
+FR-297,Kitchen King Pav Bhaji Masala 50g,Spices & Masalas,false,2260,2022-06-12
+FR-298,Premium Pav Bhaji Masala 50g,Spices & Masalas,false,1600,2022-01-25
+FR-299,Classic Garam Masala 100g,Spices & Masalas,false,4730,2022-11-12
+FR-300,Classic Pav Bhaji Masala 200g,Spices & Masalas,false,960,2021-09-18
+FR-301,Masala Instant Upma 70g,Instant Foods,false,3220,2020-10-11
+FR-302,Masala Soup Mix 280g,Instant Foods,false,2420,2022-10-25
+FR-303,Tomato Ready Khichdi 140g,Instant Foods,false,2690,2022-11-18
+FR-304,Veg Noodles 70g,Instant Foods,false,950,2020-07-06
+FR-305,Family Vermicelli 280g,Instant Foods,false,3840,2018-04-08
+FR-306,Masala Instant Upma 280g,Instant Foods,false,1160,2021-10-29
+FR-307,Veg Soup Mix 70g,Instant Foods,false,6440,2021-03-20
+FR-308,Masala Noodles 280g,Instant Foods,false,510,2020-10-20
+FR-309,Tomato Noodles 140g,Instant Foods,false,160,2022-04-07
+FR-310,Masala Noodles 70g,Instant Foods,false,2140,2026-08-24
+FR-311,Veg Soup Mix 70g,Instant Foods,false,700,2018-08-09
+FR-312,Masala Ready Khichdi 140g,Instant Foods,false,1420,2018-12-24
+FR-313,Masala Noodles 140g,Instant Foods,false,1540,2022-11-04
+FR-314,Family Noodles 140g,Instant Foods,false,2780,2018-02-20
+FR-315,Veg Soup Mix 280g,Instant Foods,false,390,2020-09-27
+FR-316,Family Soup Mix 140g,Instant Foods,false,210,2018-07-09
+FR-317,Family Ready Khichdi 140g,Instant Foods,false,1980,2021-04-04
+FR-318,Tomato Vermicelli 140g,Instant Foods,false,1110,2018-08-16
+FR-319,Tomato Noodles 280g,Instant Foods,false,400,2019-07-12
+FR-320,Veg Pasta 70g,Instant Foods,false,1540,2021-05-11
+FR-321,Family Noodles 280g,Instant Foods,false,450,2018-01-18
+FR-322,Tomato Instant Upma 280g,Instant Foods,false,1270,2021-03-16
+FR-323,Family Instant Upma 70g,Instant Foods,false,1340,2018-02-28
+FR-324,Veg Instant Upma 280g,Instant Foods,false,2380,2020-02-27
+FR-325,Tomato Soup Mix 140g,Instant Foods,false,690,2019-07-05
+FR-326,Veg Pasta 280g,Instant Foods,false,4510,2020-07-24
+FR-327,Veg Instant Upma 280g,Instant Foods,false,1410,2020-04-10
+FR-328,Masala Instant Upma 70g,Instant Foods,false,740,2021-01-08
+FR-329,Masala Ready Khichdi 70g,Instant Foods,false,2200,2020-01-30
+FR-330,Veg Soup Mix 70g,Instant Foods,false,2600,2019-05-11
+FR-331,Family Instant Upma 70g,Instant Foods,false,670,2018-09-24
+FR-332,Family Ready Khichdi 70g,Instant Foods,false,1740,2022-08-26
+FR-333,Masala Instant Upma 70g,Instant Foods,false,1330,2021-04-20
+FR-334,Family Ready Khichdi 70g,Instant Foods,false,510,2018-04-22
+FR-335,Family Pasta 280g,Instant Foods,false,740,2021-02-15
+FR-336,Veg Pasta 140g,Instant Foods,false,1040,2018-03-11
+FR-337,Veg Pasta 280g,Instant Foods,false,1830,2019-10-20
+FR-338,Masala Noodles 140g,Instant Foods,false,790,2019-06-18
+FR-339,Tomato Instant Upma 280g,Instant Foods,false,1480,2022-05-21
+FR-340,Veg Noodles 280g,Instant Foods,false,600,2021-04-16
+FR-341,Soft Milk Rusk Loaf 6 pack,Bakery & Breads,true,180,2020-09-24
+FR-342,Soft Cake Slice 6 pack,Bakery & Breads,true,2760,2021-06-08
+FR-343,Soft Sandwich Bread 250g,Bakery & Breads,true,580,2020-12-21
+FR-344,Daily Fruit Bun 400g,Bakery & Breads,true,1250,2018-08-16
+FR-345,Fresh Brown Bread 250g,Bakery & Breads,true,410,2020-12-04
+FR-346,Soft Fruit Bun 250g,Bakery & Breads,true,1370,2021-11-02
+FR-347,Soft Sandwich Bread 400g,Bakery & Breads,true,1770,2018-01-18
+FR-348,Daily Brown Bread 6 pack,Bakery & Breads,true,3850,2020-03-22
+FR-349,Fresh Fruit Bun 250g,Bakery & Breads,true,1480,2021-09-10
+FR-350,Daily Fruit Bun 400g,Bakery & Breads,true,1030,2021-01-31
+FR-351,Soft Brown Bread 6 pack,Bakery & Breads,true,2100,2021-08-11
+FR-352,Soft Milk Rusk Loaf 6 pack,Bakery & Breads,true,810,2022-10-02
+FR-353,Fresh Milk Rusk Loaf 6 pack,Bakery & Breads,true,1370,2020-04-29
+FR-354,Daily Brown Bread 400g,Bakery & Breads,true,1820,2021-06-23
+FR-355,Soft Sandwich Bread 250g,Bakery & Breads,true,840,2018-05-14
+FR-356,Fresh Cake Slice 6 pack,Bakery & Breads,true,230,2019-10-29
+FR-357,Soft Brown Bread 6 pack,Bakery & Breads,true,570,2022-08-30
+FR-358,Soft Fruit Bun 6 pack,Bakery & Breads,true,710,2022-03-01
+FR-359,Soft Sandwich Bread 400g,Bakery & Breads,true,1040,2019-10-31
+FR-360,Fresh Fruit Bun 250g,Bakery & Breads,true,530,2021-11-06
+FR-361,Fresh Pav 6 pack,Bakery & Breads,true,700,2022-08-25
+FR-362,Soft Brown Bread 250g,Bakery & Breads,true,1260,2021-11-20
+FR-363,Fresh Cake Slice 400g,Bakery & Breads,true,730,2022-11-05
+FR-364,Fresh Brown Bread 250g,Bakery & Breads,true,740,2020-09-29
+FR-365,Daily Pav 250g,Bakery & Breads,true,700,2018-05-28
+FR-366,Creamy Shrikhand 1L,Dairy Snacks,true,840,2021-12-29
+FR-367,Creamy Shrikhand 500g,Dairy Snacks,true,720,2019-11-02
+FR-368,Classic Lassi 500g,Dairy Snacks,true,390,2021-12-29
+FR-369,Creamy Cheese Slices 1L,Dairy Snacks,true,2290,2021-01-30
+FR-370,Classic Lassi 1L,Dairy Snacks,true,1710,2019-11-30
+FR-371,Creamy Cheese Slices 500g,Dairy Snacks,true,480,2021-12-26
+FR-372,Creamy Cheese Slices 200g,Dairy Snacks,true,370,2019-11-05
+FR-373,Creamy Shrikhand 500g,Dairy Snacks,true,630,2022-07-03
+FR-374,Fresh Chaas 200g,Dairy Snacks,true,160,2018-01-17
+FR-375,Classic Cheese Slices 500g,Dairy Snacks,true,350,2020-01-08
+FR-376,Classic Paneer 200g,Dairy Snacks,true,1520,2019-10-02
+FR-377,Creamy Cheese Slices 1L,Dairy Snacks,true,500,2020-05-17
+FR-378,Creamy Paneer 500g,Dairy Snacks,true,450,2019-02-18
+FR-379,Fresh Shrikhand 500g,Dairy Snacks,true,1700,2022-05-13
+FR-380,Classic Chaas 500g,Dairy Snacks,true,440,2021-10-17
+FR-381,Creamy Paneer 200g,Dairy Snacks,true,850,2022-01-18
+FR-382,Creamy Shrikhand 500g,Dairy Snacks,true,1250,2021-10-30
+FR-383,Fresh Paneer 1L,Dairy Snacks,true,1180,2018-11-13
+FR-384,Creamy Flavoured Curd 1L,Dairy Snacks,true,1900,2022-01-27
+FR-385,Classic Shrikhand 500g,Dairy Snacks,true,1940,2018-05-29
+FR-386,House Mint Chutney 300g,Fresh Chutneys & Dips,true,540,2022-01-09
+FR-387,House Tamarind Chutney 150g,Fresh Chutneys & Dips,true,370,2021-04-04
+FR-388,Fresh Tamarind Chutney 300g,Fresh Chutneys & Dips,true,380,2019-06-05
+FR-389,Fresh Mint Chutney 150g,Fresh Chutneys & Dips,true,670,2020-10-11
+FR-390,Fresh Green Chilli Thecha 150g,Fresh Chutneys & Dips,true,760,2019-02-21
+FR-391,Fresh Green Chilli Thecha 150g,Fresh Chutneys & Dips,true,160,2022-05-25
+FR-392,Fresh Tamarind Chutney 300g,Fresh Chutneys & Dips,true,2180,2020-01-09
+FR-393,Fresh Mint Chutney 150g,Fresh Chutneys & Dips,true,160,2019-07-16
+FR-394,House Green Chilli Thecha 150g,Fresh Chutneys & Dips,true,1300,2021-10-08
+FR-395,House Mint Chutney 150g,Fresh Chutneys & Dips,true,610,2022-05-28
+FR-396,House Garlic Dip 150g,Fresh Chutneys & Dips,true,390,2021-04-04
+FR-397,Fresh Mint Chutney 300g,Fresh Chutneys & Dips,true,1190,2019-03-17
+FR-398,House Garlic Dip 300g,Fresh Chutneys & Dips,true,330,2020-05-25
+FR-399,Fresh Green Chilli Thecha 300g,Fresh Chutneys & Dips,true,530,2018-04-20
+FR-400,Fresh Hummus 300g,Fresh Chutneys & Dips,true,1220,2019-01-26

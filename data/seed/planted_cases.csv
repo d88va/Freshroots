@@ -1,0 +1,48 @@
+sku_id,name,category,perishable,role,expected,weeks_of_stock_vs_uplifted_demand,note
+FR-004,Spicy Bhujia 200g,Namkeen & Snacks,false,competitor_drop,needs_judgment (4-week average under half the 12-week),11.33,Sales fell to a quarter after a competitor scheme
+FR-013,Classic Banana Chips 400g,Namkeen & Snacks,false,high_demand_stockout,"high_demand + stockout_risk, urgent",2.00,High demand AND 2 weeks of stock: urgent
+FR-015,Jumbo Mathri 400g,Namkeen & Snacks,false,overstock_risk,overstock_risk,18.00,Stock covers 18 weeks (limit 14)
+FR-016,Salted Banana Chips 400g,Namkeen & Snacks,false,high_demand_stockout,"high_demand + stockout_risk, urgent",3.50,High demand AND 3.5 weeks of stock: urgent
+FR-066,Salted Khakhra 200g,Namkeen & Snacks,false,stockout_risk,stockout_risk,3.50,Stock covers 3.5 weeks (limit 6)
+FR-074,Jumbo Bhujia 200g,Namkeen & Snacks,false,high_demand,high_demand,9.91,"Sales up sharply in last 4 weeks, stock healthy"
+FR-086,Classic Digestive 100g,Biscuits & Cookies,false,high_demand,high_demand,8.56,"Sales up sharply in last 4 weeks, stock healthy"
+FR-097,Family Pack Rusk 250g,Biscuits & Cookies,false,overstock_risk,overstock_risk,30.00,Stock covers 30 weeks (limit 14)
+FR-103,Classic Cream Biscuits 250g,Biscuits & Cookies,false,high_demand,high_demand,10.32,"Sales up sharply in last 4 weeks, stock healthy"
+FR-109,Choco Marie 500g,Biscuits & Cookies,false,stockout_risk,stockout_risk,2.50,Stock covers 2.5 weeks (limit 6)
+FR-114,Choco Cookies 100g,Biscuits & Cookies,false,stockout_risk,stockout_risk,5.60,Stock covers 5.6 weeks (limit 6)
+FR-120,Family Pack Rusk 500g,Biscuits & Cookies,false,high_demand,high_demand,11.76,"Sales up sharply in last 4 weeks, stock healthy"
+FR-126,Choco Cream Biscuits 250g,Biscuits & Cookies,false,stockout_risk,stockout_risk,4.50,Stock covers 4.5 weeks (limit 6)
+FR-130,Mini Cream Biscuits 100g,Biscuits & Cookies,false,high_demand,high_demand,11.34,"Sales up sharply in last 4 weeks, stock healthy"
+FR-136,Classic Cookies 500g,Biscuits & Cookies,false,overstock_risk,overstock_risk,25.00,Stock covers 25 weeks (limit 14)
+FR-137,Family Pack Digestive 500g,Biscuits & Cookies,false,rebound,needs_judgment (4-week average over 2x the 12-week),11.11,"Almost no sales for 8 weeks (supply gap), then back to normal"
+FR-145,Everyday Toor Dal 1kg,"Atta, Rice & Dal",false,stockout_risk,stockout_risk,1.80,Stock covers 1.8 weeks (limit 6)
+FR-156,Select Moong Dal 5kg,"Atta, Rice & Dal",false,competitor_drop,needs_judgment (4-week average under half the 12-week),8.82,Sales fell to a quarter after a competitor scheme
+FR-178,Everyday Moong Dal 1kg,"Atta, Rice & Dal",false,high_demand,high_demand,9.91,"Sales up sharply in last 4 weeks, stock healthy"
+FR-181,Everyday Chana Dal 10kg,"Atta, Rice & Dal",false,gap,needs_judgment (missing weeks),10.30,Two weeks of sales missing in the last 12
+FR-186,Select Poha 10kg,"Atta, Rice & Dal",false,stockout_risk,stockout_risk,5.40,Stock covers 5.4 weeks (limit 6)
+FR-202,Cold Pressed Mustard Oil 1L,Edible Oils,false,stockout_risk,stockout_risk,1.20,Stock covers 1.2 weeks (limit 6)
+FR-206,Pure Sunflower Oil 500ml,Edible Oils,false,high_demand_stockout,"high_demand + stockout_risk, urgent",4.50,High demand AND 4.5 weeks of stock: urgent
+FR-212,Cold Pressed Rice Bran Oil 1L,Edible Oils,false,overstock_risk,overstock_risk,22.00,Stock covers 22 weeks (limit 14)
+FR-235,Zero Iced Tea 250ml,Beverages,false,stockout_risk,stockout_risk,4.00,Stock covers 4 weeks (limit 6)
+FR-243,Original Cola 250ml,Beverages,false,stockout_risk,stockout_risk,5.00,Stock covers 5 weeks (limit 6)
+FR-262,Fresh Lemon Soda 1.25L,Beverages,false,high_demand,high_demand,9.53,"Sales up sharply in last 4 weeks, stock healthy"
+FR-263,Zero Coconut Water 250ml,Beverages,false,overstock_risk,overstock_risk,40.00,Stock covers 40 weeks (limit 14)
+FR-270,Fresh Energy Drink 1.25L,Beverages,false,high_demand,high_demand,10.10,"Sales up sharply in last 4 weeks, stock healthy"
+FR-280,Classic Red Chilli 200g,Spices & Masalas,false,overstock_risk,overstock_risk,35.00,Stock covers 35 weeks (limit 14)
+FR-287,Kitchen King Pav Bhaji Masala 200g,Spices & Masalas,false,stockout_risk,stockout_risk,3.00,Stock covers 3 weeks (limit 6)
+FR-291,Classic Pav Bhaji Masala 50g,Spices & Masalas,false,overstock_risk,overstock_risk,17.00,Stock covers 17 weeks (limit 14)
+FR-300,Classic Pav Bhaji Masala 200g,Spices & Masalas,false,overstock_risk,overstock_risk,20.00,Stock covers 20 weeks (limit 14)
+FR-304,Veg Noodles 70g,Instant Foods,false,overstock_risk,overstock_risk,16.00,Stock covers 16 weeks (limit 14)
+FR-310,Masala Noodles 70g,Instant Foods,false,new_launch,needs_judgment (under 12 weeks of history),9.00,"Launched 8 weeks ago, only 8 weeks of history"
+FR-323,Family Instant Upma 70g,Instant Foods,false,overstock_risk,overstock_risk,15.00,Stock covers 15 weeks (limit 14)
+FR-341,Soft Milk Rusk Loaf 6 pack,Bakery & Breads,true,p_deep_stockout,stockout_risk (perishable rule),1.00,Perishable with 1 week of stock
+FR-343,Soft Sandwich Bread 250g,Bakery & Breads,true,p_stockout_edge,stockout_risk (perishable rule),2.90,"Perishable: 2.9 weeks, just under the 3-week minimum"
+FR-344,Daily Fruit Bun 400g,Bakery & Breads,true,p_ok_low_edge,no flag (perishable rule),3.10,"Perishable: 3.1 weeks, just inside the window, no flag"
+FR-347,Soft Sandwich Bread 400g,Bakery & Breads,true,p_replace_proof,overstock_risk (perishable rule replaces standard rule),5.80,"Perishable at 5.8 weeks: standard rule would say stockout, perishable rule says overstock"
+FR-351,Soft Brown Bread 6 pack,Bakery & Breads,true,p_gap,needs_judgment (missing weeks),3.50,Perishable with two missing weeks of sales
+FR-372,Creamy Cheese Slices 200g,Dairy Snacks,true,p_competitor_drop,needs_judgment (4-week average under half the 12-week),3.50,"Perishable, sales fell to a quarter"
+FR-373,Creamy Shrikhand 500g,Dairy Snacks,true,p_overstock_edge,overstock_risk (perishable rule),4.10,"Perishable: 4.1 weeks, just over the 4-week maximum"
+FR-381,Creamy Paneer 200g,Dairy Snacks,true,p_ok_high_edge,no flag (perishable rule),3.90,"Perishable: 3.9 weeks, just inside the window, no flag"
+FR-387,House Tamarind Chutney 150g,Fresh Chutneys & Dips,true,p_high_demand_stockout,"high_demand + stockout_risk, urgent",2.20,Perishable with high demand AND 2.2 weeks: urgent
+FR-391,Fresh Green Chilli Thecha 150g,Fresh Chutneys & Dips,true,p_high_demand,high_demand,3.40,"Perishable with high demand, stock inside the window"
+FR-392,Fresh Tamarind Chutney 300g,Fresh Chutneys & Dips,true,p_deep_overstock,overstock_risk (perishable rule),8.00,Perishable with 8 weeks of stock (write-off risk)
