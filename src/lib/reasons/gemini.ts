@@ -75,9 +75,17 @@ export function createGemini(o: GeminiOptions): TextGenerator | null {
       throw new GeminiError(name === "TimeoutError" || name === "AbortError" ? "timeout" : "api_error", (e as Error).message);
     }
     if (res.status === 429) {
-      const retryAfter = Number(res.headers.get("retry-after"));
-      const err = new GeminiError("rate_limited", "Gemini rate limit reached");
-      (err as GeminiError & { retryAfterMs?: number }).retryAfterMs = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : undefined;
+      const header = Number(res.headers.get("retry-after"));
+      let waitMs = Number.isFinite(header) && header > 0 ? header * 1000 : undefined;
+      let why = "Gemini rate limit reached";
+      try {
+        const msg = ((await res.json()) as { error?: { message?: string } }).error?.message ?? "";
+        if (/quota/i.test(msg)) why = "Gemini quota used up";
+        const t = msg.match(/retry in (?:(\d+)h)?(?:(\d+)m)?(?:([\d.]+)s)?/i); // "Please retry in 19h59m8.1s"
+        if (t) waitMs = ((Number(t[1] ?? 0) * 60 + Number(t[2] ?? 0)) * 60 + Number(t[3] ?? 0)) * 1000;
+      } catch { /* no body */ }
+      const err = new GeminiError("rate_limited", waitMs && waitMs > 120000 ? `${why}; Google says retry in ${Math.round(waitMs / 60000)} minutes` : why) as GeminiError & { retryAfterMs?: number };
+      err.retryAfterMs = waitMs;
       throw err;
     }
     if (!res.ok) {
@@ -103,7 +111,7 @@ export function createGemini(o: GeminiOptions): TextGenerator | null {
           const retryable = err.kind === "rate_limited" || (err.kind === "api_error" && /returned 5\d\d/.test(err.message));
           if (!retryable || attempt >= maxRetries) throw err;
           const backoff = err.retryAfterMs ?? Math.min(20000, 2000 * 2 ** attempt);
-          if (deadline !== undefined && now() + backoff > deadline) throw err; // no time left to wait
+          if (backoff > 120000 || (deadline !== undefined && now() + backoff > deadline)) throw err; // a long wait or no time left: give up now
           nextSlot = Math.max(nextSlot, now() + backoff);
         }
       }

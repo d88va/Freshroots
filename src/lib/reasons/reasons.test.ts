@@ -156,6 +156,12 @@ describe("Gemini client", () => {
     const h = harness([new Response("{}", { status: 429, headers: { "retry-after": "30" } })]);
     await expect(h.gen({ system: "s", user: "u" }, h.clock() + 5000)).rejects.toMatchObject({ kind: "rate_limited" });
   });
+  it("fails fast, without waiting, when the daily quota is used up", async () => {
+    const quota = JSON.stringify({ error: { message: "You exceeded your current quota. Please retry in 19h59m8.15s." } });
+    const h = harness([new Response(quota, { status: 429 })]);
+    await expect(h.gen({ system: "s", user: "u" })).rejects.toMatchObject({ kind: "rate_limited", message: expect.stringContaining("quota") });
+    expect(h.sleeps).toEqual([]); // no waiting around
+  });
   it("reports other failures as api_error and blocked answers as blocked", async () => {
     await expect(harness([new Response("no", { status: 400 })]).gen({ system: "s", user: "u" })).rejects.toMatchObject({ kind: "api_error" });
     const blocked = JSON.stringify({ candidates: [{ finishReason: "SAFETY" }] });

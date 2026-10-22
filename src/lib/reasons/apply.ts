@@ -39,14 +39,16 @@ export async function fillReasons(sql: Sql, opts: { gen: TextGenerator | null; b
   }
 
   // Step 2: ask the AI, within the budget
-  let ai = 0, template = 0, waiting = 0;
+  let ai = 0, template = 0, waiting = 0, limited = 0;
   for (const f of rows) {
     if (f.reason !== null && f.reason_fallback && !RETRYABLE.includes(f.reason_fallback)) { template++; continue; }
-    if (!opts.gen || Date.now() >= deadline) { waiting++; continue; }
+    // Two rate-limit answers in a row means the quota is used up: stop asking, the rest keep their template for now.
+    if (!opts.gen || Date.now() >= deadline || limited >= 2) { waiting++; continue; }
     const r = await makeReason({ evaluation: toEvaluation(f), sku_name: f.name, is_perishable: f.is_perishable }, opts.gen, deadline);
     await sql.query("update flags set reason = $1, reason_source = $2, reason_fallback = $3 where id = $4", [r.reason, r.source, r.fallback, f.id]);
     await sql.query("insert into reason_attempts (flag_id, outcome, model, latency_ms, ai_text, detail) values ($1,$2,$3,$4,$5,$6)",
       [f.id, r.source === "ai" ? "accepted" : r.fallback, opts.model ?? null, r.latency_ms, r.ai_text, r.detail]);
+    limited = r.fallback === "rate_limited" ? limited + 1 : 0;
     if (r.source === "ai") ai++; else template++;
   }
   return { total: rows.length, ai, template, waiting };

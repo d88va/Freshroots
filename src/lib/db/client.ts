@@ -5,7 +5,8 @@ import { neon } from "@neondatabase/serverless";
 export function getSql() {
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error("DATABASE_URL must be set to your Neon connection string (see .env.local.example).");
-  return neon(url);
+  // no-store: Next.js caches fetch calls by default, and this driver talks to Neon over fetch. Cached results would show old flags.
+  return neon(url, { fetchOptions: { cache: "no-store" } });
 }
 export type Sql = ReturnType<typeof getSql>;
 

@@ -8,9 +8,9 @@ export default function Home() {
         Upload page) and the Zoho step is a mock. The system never places an order.
       </div>
       <div className="card">
-        <strong>Phase 1 of 10: setup and data.</strong>
+        <strong>Phase 5 of 10: review, approvals and feedback capture.</strong>
         <p className="muted" style={{ marginBottom: 0 }}>
-          The review screen, orders, runs, metrics and settings arrive in later phases. For now you can load data on the Upload page.
+          Start at Review. Runs, the season calendar, the feedback summary, metrics and settings arrive in later phases.
         </p>
       </div>
     </>
