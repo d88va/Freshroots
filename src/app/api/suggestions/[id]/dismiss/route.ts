@@ -3,8 +3,8 @@ import { getSql } from "@/lib/db/client";
 import { dismissSuggestion } from "@/lib/feedback/resolve";
 
 // Raghav dismisses a suggestion. Nothing changes except the card.
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
-  const id = Number(params.id);
+export async function POST(req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
+  const id = Number((await ctx.params).id);
   const { reason } = (await req.json().catch(() => ({}))) as { reason?: string };
   if (!Number.isInteger(id)) return NextResponse.json({ error: "Bad suggestion id." }, { status: 400 });
   const r = await dismissSuggestion(getSql(), id, reason ?? "");

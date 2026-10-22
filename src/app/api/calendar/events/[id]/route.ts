@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSql } from "@/lib/db/client";
 import { validateEvent } from "@/lib/season/events";
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const id = Number(params.id);
+export async function PATCH(req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
+  const id = Number((await ctx.params).id);
   if (!Number.isInteger(id)) return NextResponse.json({ error: "Bad event id." }, { status: 400 });
   const v = validateEvent(await req.json().catch(() => ({})));
   if (!v.ok) return NextResponse.json({ error: v.error }, { status: 422 });
@@ -17,8 +17,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 }
 
-export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
-  const id = Number(params.id);
+export async function DELETE(_req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
+  const id = Number((await ctx.params).id);
   if (!Number.isInteger(id)) return NextResponse.json({ error: "Bad event id." }, { status: 400 });
   const done = (await getSql().query("delete from calendar_events where id = $1 returning id", [id])) as { id: number }[];
   return done.length ? NextResponse.json({ ok: true }) : NextResponse.json({ error: "Event not found." }, { status: 404 });

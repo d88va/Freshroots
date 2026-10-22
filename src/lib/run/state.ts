@@ -1,4 +1,5 @@
 import type { Sql } from "../db/client";
+import { todayIST } from "./schedule";
 
 export interface PauseState { paused: boolean; paused_at: string | null; paused_reason: string | null }
 
@@ -30,4 +31,13 @@ export async function setPaused(sql: Sql, pause: boolean, reasonRaw: string): Pr
   ] as any)) as unknown[][];
   if (!results[1].length) return { ok: false, error: pause ? "The system is already paused." : "The system is not paused.", status: 409 };
   return { ok: true };
+}
+
+/**
+ * The date the app treats as "today": the run date override if one is set (demo only), otherwise today in India.
+ * The synthetic demo data stops in October 2026, so a demo sets this and the rules keep working on any later day.
+ */
+export async function asOfDate(sql: Sql): Promise<string> {
+  const [r] = (await sql.query("select value from rule_settings where key = 'run_date_override'")) as { value: unknown }[];
+  return typeof r?.value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(r.value) ? r.value : todayIST();
 }

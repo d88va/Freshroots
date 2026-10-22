@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSql } from "@/lib/db/client";
 import { geminiFromEnv } from "@/lib/reasons/gemini";
 import { startRun } from "@/lib/run/execute";
-import { isAuthorizedCron, todayIST } from "@/lib/run/schedule";
+import { isAuthorizedCron } from "@/lib/run/schedule";
+import { asOfDate } from "@/lib/run/state";
 
 export const maxDuration = 60;
 export const dynamic = "force-dynamic";
@@ -12,6 +13,6 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   if (!process.env.CRON_SECRET) return NextResponse.json({ error: "CRON_SECRET is not set on the server." }, { status: 500 });
   if (!isAuthorizedCron(req.headers.get("authorization"), process.env.CRON_SECRET)) return NextResponse.json({ error: "Not authorised." }, { status: 401 });
-  const out = await startRun(getSql(), { trigger: "cron", runDate: todayIST(), gen: geminiFromEnv(), reasonBudgetMs: 35_000 });
+  const out = await startRun(getSql(), { trigger: "cron", runDate: await asOfDate(getSql()), gen: geminiFromEnv(), reasonBudgetMs: 35_000 });
   return NextResponse.json(out);
 }

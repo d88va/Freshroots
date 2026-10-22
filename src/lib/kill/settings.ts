@@ -8,6 +8,7 @@ export interface ProjectField { key: string; label: string; help: string; type: 
 export const PROJECT_FIELDS: ProjectField[] = [
   { key: "project_start_date", label: "Project start date", help: "Day 30 for K1 counts from here.", type: "date", group: "Project dates" },
   { key: "go_live_date", label: "Go-live date", help: "The first day Raghav used the system for real. K3 and K4 count from here. Leave empty until then.", type: "date", group: "Project dates" },
+  { key: "run_date_override", label: "Run date override (demo only)", help: "Leave EMPTY for real use. The demo data ends in October 2026, so runs and the Metrics page pretend today is this date.", type: "date", group: "Project dates" },
   { key: "k1_day", label: "K1: day limit", help: "The SAP export must be automated and clean by this day.", type: "int", group: "Kill criteria (they only show status)" },
   { key: "k1_export_automated", label: "K1: scheduled SAP export confirmed", help: "Tick only when IT confirms a scheduled export is running. In this demo build the data is synthetic CSV.", type: "bool", group: "Kill criteria (they only show status)" },
   { key: "k2_min_catch_pct", label: "K2: stop below this % caught", help: "Share of past losses the rules must have flagged in the backtest.", type: "num", group: "Kill criteria (they only show status)" },
@@ -29,6 +30,7 @@ const numIn = (lo: number, hi: number) => (v: unknown) => (typeof v === "number"
 const CHECKS: Record<string, (v: unknown) => string | null> = {
   project_start_date: (v) => (isDate(v) ? null : "must be a real date (2026-05-26)"),
   go_live_date: (v) => (v === null || isDate(v) ? null : "must be a real date, or empty"),
+  run_date_override: (v) => (v === null || isDate(v) ? null : "must be a real date, or empty"),
   k1_day: intIn(1, 365), k1_export_automated: (v) => (typeof v === "boolean" ? null : "must be on or off"),
   k2_min_catch_pct: numIn(1, 100), k2_amber_margin: numIn(0, 50), k3_override_pct: numIn(1, 100), k3_amber_pct: numIn(1, 100),
   k3_after_weeks: intIn(1, 26), k4_quarters: intIn(1, 8), k4_target_pct: numIn(1, 100),

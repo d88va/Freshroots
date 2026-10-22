@@ -17,22 +17,26 @@
     "reasons:fill": "tsx --env-file=.env.local scripts/fill-reasons.ts",
     "seed:history": "tsx --env-file=.env.local scripts/seed-history.ts",
     "feedback:check": "tsx --env-file=.env.local scripts/run-feedback.ts",
+    "demo:reset": "tsx --env-file=.env.local scripts/demo-reset.ts",
     "rules:dry": "tsx --env-file=.env.local scripts/run-rules.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
-    "next": "14.2.15",
+    "next": "^16.4.2",
     "papaparse": "^5.4.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/papaparse": "^5.3.14",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4",
     "vitest": "^2.1.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

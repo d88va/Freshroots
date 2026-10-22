@@ -1,7 +1,7 @@
 import { getSql } from "@/lib/db/client";
 import { loadCriteria } from "@/lib/kill/load";
 import type { Status } from "@/lib/kill/criteria";
-import { todayIST } from "@/lib/run/schedule";
+import { asOfDate } from "@/lib/run/state";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +12,7 @@ const dayLabel = (d: unknown) => new Date(d as string).toLocaleDateString("en-IN
 
 export default async function Metrics() {
   const sql = getSql();
-  const today = todayIST();
+  const today = await asOfDate(sql);
   const criteria = await loadCriteria(sql, today);
   const s = Object.fromEntries(((await sql.query("select key, value from rule_settings where key in ('go_live_date')")) as { key: string; value: unknown }[]).map((r) => [r.key, r.value]));
   const goLive = typeof s.go_live_date === "string" ? s.go_live_date : null;

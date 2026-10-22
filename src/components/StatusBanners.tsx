@@ -2,13 +2,14 @@ import Link from "next/link";
 import { getSql } from "@/lib/db/client";
 import { loadK3 } from "@/lib/kill/load";
 import { getPauseState } from "@/lib/run/state";
-import { todayIST } from "@/lib/run/schedule";
+import { asOfDate } from "@/lib/run/state";
 
 // Shown on every page. A paused system always says so. A red K3 SUGGESTS a pause, but nothing here pauses anything.
 export default async function StatusBanners() {
   try {
     const sql = getSql();
-    const [state, k3] = await Promise.all([getPauseState(sql), loadK3(sql, todayIST())]);
+    const today = await asOfDate(sql);
+    const [state, k3] = await Promise.all([getPauseState(sql), loadK3(sql, today)]);
     return (
       <>
         {state.paused && (

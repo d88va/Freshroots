@@ -16,10 +16,11 @@ const show = (v: unknown) => (Array.isArray(v) ? v.join(", ") : String(v));
 interface Row { id: number; flag_type: string; window_type: string; status: string; tag: string | null; category: string; rating: string | null; source: string | null; kind: string | null; result: string | null }
 interface Sug { id: number; dedupe_key: string; rule_key: string; text: string; evidence: SuggestionView["evidence"] & Record<string, unknown>; proposal: SuggestionView["proposal"]; status: string; resolved_at: string | null; resolution: { reason?: string; version_id?: number; changes?: Record<string, unknown> } | null }
 
-export default async function Feedback({ searchParams }: { searchParams: { month?: string } }) {
+export default async function Feedback({ searchParams }: { searchParams: Promise<{ month?: string }> }) {
   const sql = getSql();
   const months = ((await sql.query("select distinct to_char(decided_at at time zone 'Asia/Kolkata','YYYY-MM') as m from flags where status <> 'pending' order by 1 desc")) as { m: string }[]).map((r) => r.m);
-  const month = searchParams.month && months.includes(searchParams.month) ? searchParams.month : months[0];
+  const wanted = (await searchParams).month;
+  const month = wanted && months.includes(wanted) ? wanted : months[0];
 
   const settings = Object.fromEntries(((await sql.query("select key, value from rule_settings")) as { key: string; value: unknown }[]).map((r) => [r.key, r.value]));
   const suggestions = ((await sql.query("select id, dedupe_key, rule_key, text, evidence, proposal, status, resolved_at, resolution from suggestions order by id desc")) as Sug[]).map((s) => ({ ...s, id: Number(s.id) }));

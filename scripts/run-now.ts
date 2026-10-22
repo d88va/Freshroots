@@ -2,13 +2,13 @@
 // Same code as the Run now button and the cron job. Respects the Pause switch.
 import { getSql } from "../src/lib/db/client";
 import { startRun } from "../src/lib/run/execute";
-import { todayIST } from "../src/lib/run/schedule";
+import { asOfDate } from "../src/lib/run/state";
 import { geminiFromEnv } from "../src/lib/reasons/gemini";
 
 const arg = (name: string, fallback: string) => { const i = process.argv.indexOf(`--${name}`); return i > -1 ? process.argv[i + 1] : fallback; };
 
 async function main() {
-  const runDate = arg("date", todayIST());
+  const runDate = arg("date", await asOfDate(getSql()));
   const budget = Number(arg("budget", "120")) * 1000;
   console.log(`Running on ${runDate}, reasons budget ${budget / 1000}s ...`);
   console.log(JSON.stringify(await startRun(getSql(), { trigger: "manual", runDate, gen: geminiFromEnv(), reasonBudgetMs: budget }), null, 1));

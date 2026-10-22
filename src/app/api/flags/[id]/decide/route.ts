@@ -4,8 +4,8 @@ import { validateDecision, type DecisionInput, type FlagForDecision } from "@/li
 
 // Raghav approves, edits or overrides one flag. The same rules the screen uses are applied again here,
 // so a needs-judgment flag can never be approved, whatever the browser sends.
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
-  const id = Number(params.id);
+export async function POST(req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
+  const id = Number((await ctx.params).id);
   if (!Number.isInteger(id)) return NextResponse.json({ error: "Bad flag id." }, { status: 400 });
   let body: DecisionInput;
   try { body = await req.json(); } catch { return NextResponse.json({ error: "Bad request." }, { status: 400 }); }
