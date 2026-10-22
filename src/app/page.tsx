@@ -8,9 +8,9 @@ export default function Home() {
         Upload page) and the Zoho step is a mock. The system never places an order.
       </div>
       <div className="card">
-        <strong>Phase 6 of 10: schedule and runs.</strong>
+        <strong>Phase 7 of 10: season calendar.</strong>
         <p className="muted" style={{ marginBottom: 0 }}>
-          Start at Review. The season calendar, the feedback summary, metrics and settings arrive in later phases.
+          Start at Review. The feedback summary, metrics and settings arrive in later phases.
         </p>
       </div>
     </>
