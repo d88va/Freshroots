@@ -10,7 +10,8 @@
     "seed:generate": "tsx scripts/generate-seed.ts",
     "seed:check": "tsx scripts/check-seed.ts",
     "seed:load": "tsx --env-file=.env.local scripts/load-seed.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "rules:dry": "tsx --env-file=.env.local scripts/run-rules.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
