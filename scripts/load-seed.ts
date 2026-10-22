@@ -18,6 +18,11 @@ const FILES: [FileKind, string][] = [
 
 async function main() {
   const sql = getSql();
+  if (process.argv.includes("--reset")) {
+    // Wipes the data tables first (so rows from an older seed do not linger). Only for the synthetic seed.
+    await sql.query("truncate skus, calendar_events cascade");
+    console.log("Reset: data tables emptied.");
+  }
   for (const [kind, file] of FILES) {
     const text = fs.readFileSync(path.join(process.cwd(), "data", "seed", file), "utf8");
     process.stdout.write(`Loading ${file} ... `);

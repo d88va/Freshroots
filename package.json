@@ -11,6 +11,7 @@
     "seed:check": "tsx scripts/check-seed.ts",
     "seed:load": "tsx --env-file=.env.local scripts/load-seed.ts",
     "test": "vitest run",
+    "backtest": "tsx --env-file=.env.local scripts/run-backtest.ts",
     "rules:dry": "tsx --env-file=.env.local scripts/run-rules.ts"
   },
   "dependencies": {

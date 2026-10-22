@@ -194,7 +194,9 @@ function simulate(s: Sku, demand: number[]): Sim {
   const snaps = new Array(N_WEEKS).fill(0);
   const stockouts: Sim["stockouts"] = [];
   const writeOffs: Sim["writeOffs"] = [];
-  const cover = s.perishable ? between(5.0, 5.8) : between(8.0, 11.0); // weeks of forecast the planner orders up to
+  // Weeks of forecast the planner orders up to. Set so a planner who follows the 6-14 week (3-4 for perishables)
+  // bands from the brief keeps stock inside them most of the time; losses then come from shocks, delays and festival ramps.
+  const cover = s.perishable ? between(5.4, 6.2) : between(11.5, 13.5);
   const planted = s.role !== "normal";
   let stock = Math.round(demand[0] * (s.perishable ? 3.5 : 9));
   let batches: { qty: number; age: number }[] = s.perishable ? [{ qty: stock, age: 0 }] : [];
@@ -224,7 +226,7 @@ function simulate(s: Sku, demand: number[]): Sim {
       const q = Math.round(Math.max(0, cover * f - position) / 10) * 10;
       if (q > 0) {
         const delayed = rand() < (s.perishable ? 0.08 : 0.2);
-        const lead = 1 + (delayed ? (s.perishable ? 1 : 2 + Math.floor(rand() * 3)) : 0);
+        const lead = 1 + (delayed ? (s.perishable ? 1 : 3 + Math.floor(rand() * 4)) : 0);
         pipeline.push({ arr: w + lead, qty: q });
       }
     }
