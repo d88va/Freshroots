@@ -1,4 +1,12 @@
-import { neon } from "@neondatabase/serverless";
+import { neon, neonConfig } from "@neondatabase/serverless";
+
+// A one-off network blip (or Neon waking up from sleep) should not blank a page. Retry network errors, never HTTP answers.
+neonConfig.fetchFunction = async (input: RequestInfo | URL, init?: RequestInit) => {
+  for (let attempt = 0; ; attempt++) {
+    try { return await fetch(input, init); }
+    catch (e) { if (attempt >= 2) throw e; await new Promise((r) => setTimeout(r, 400 * (attempt + 1))); }
+  }
+};
 
 // Server-side only. DATABASE_URL is the Neon connection string (an environment variable);
 // it is read in API routes and scripts and never sent to the browser.

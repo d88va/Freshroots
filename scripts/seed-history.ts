@@ -147,6 +147,8 @@ async function main() {
   // Demo dates for the kill-criteria panel (Phase 9): the project started in May, the rules went live on the first seeded run.
   await sql.query("update rule_settings set value = $2, updated_at = now() where key = $1", ["go_live_date", JSON.stringify(FIRST_RUN)]);
   await sql.query("update rule_settings set value = $2, updated_at = now() where key = $1", ["project_start_date", JSON.stringify("2026-05-26")]);
+  // K1 needs the owner to confirm a scheduled SAP export. Here the data is synthetic CSV, so this is a DEMO value, set so the panel can show every colour.
+  await sql.query("update rule_settings set value = 'true', updated_at = now() where key = 'k1_export_automated'");
   console.log(`Saved ${runs.length} runs and ${all.length} flags. go_live_date = ${FIRST_RUN}, project_start_date = 2026-05-26 (demo values).`);
 }
 main().catch((e) => { console.error(e.message); process.exit(1); });

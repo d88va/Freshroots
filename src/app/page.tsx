@@ -8,9 +8,9 @@ export default function Home() {
         Upload page) and the Zoho step is a mock. The system never places an order.
       </div>
       <div className="card">
-        <strong>Phase 8 of 10: feedback loop.</strong>
+        <strong>Phase 9 of 10: metrics, kill criteria and settings.</strong>
         <p className="muted" style={{ marginBottom: 0 }}>
-          Start at Review. Metrics, the kill criteria and settings arrive in later phases.
+          Start at Review. The kill criteria and the Pause switch are on Metrics and Settings.
         </p>
       </div>
     </>
