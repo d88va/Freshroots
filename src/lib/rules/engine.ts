@@ -109,8 +109,10 @@ const EPS = 1e-9; // "more than" and "below" are strict; this stops 1.2 * 100 = 
 const r2 = (n: number) => Math.round(n * 100) / 100;
 const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
 
-/** Returns the flag for one SKU on one run date, or null when the SKU needs no action. */
-export function evaluateSku(input: SkuInput, runDate: string, s: RuleSettings): Evaluation | null {
+export interface Measure { numbers: FlagNumbers; types: FlagType[]; triggers: JudgmentTrigger[] }
+
+/** Every figure for one SKU on one run date, whether or not it ends up flagged. Used by flags and by outcome checks. */
+export function measureSku(input: SkuInput, runDate: string, s: RuleSettings): Measure {
   // The most recent complete week is the one before the week containing the run date.
   const lastWeek = addDays(mondayOf(runDate), -7);
   const window = Array.from({ length: s.baseline_weeks }, (_, i) => addDays(lastWeek, -7 * i)); // newest first
@@ -181,6 +183,12 @@ export function evaluateSku(input: SkuInput, runDate: string, s: RuleSettings): 
     conflict: false,
   };
 
+  return { numbers, types, triggers };
+}
+
+/** Returns the flag for one SKU on one run date, or null when the SKU needs no action. */
+export function evaluateSku(input: SkuInput, runDate: string, s: RuleSettings): Evaluation | null {
+  const { numbers, types, triggers } = measureSku(input, runDate, s);
   if (triggers.length) {
     // Never auto-recommend a quantity for these. Raghav decides.
     return {

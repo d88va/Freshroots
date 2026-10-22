@@ -15,6 +15,8 @@
     "reasons:demo": "tsx --env-file=.env.local scripts/demo-reasons.ts",
     "run:now": "tsx --env-file=.env.local scripts/run-now.ts",
     "reasons:fill": "tsx --env-file=.env.local scripts/fill-reasons.ts",
+    "seed:history": "tsx --env-file=.env.local scripts/seed-history.ts",
+    "feedback:check": "tsx --env-file=.env.local scripts/run-feedback.ts",
     "rules:dry": "tsx --env-file=.env.local scripts/run-rules.ts"
   },
   "dependencies": {

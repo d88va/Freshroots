@@ -40,7 +40,7 @@ export async function startRun(sql: Sql, o: RunOptions): Promise<RunOutcome> {
 
   // 2. Take the lock and start, in one statement: no other run may be in progress (a stuck one is ignored after 10 minutes).
   const started = (await sql.query(
-    `insert into runs (trigger, run_date) select $1, $2
+    `insert into runs (trigger, run_date, rule_version_id) select $1, $2, (select max(id) from rule_versions)
       where not exists (select 1 from runs where status = 'running' and started_at > now() - interval '10 minutes') returning id`, [o.trigger, o.runDate])) as { id: number }[];
   if (!started.length) {
     const [r] = (await sql.query("insert into runs (trigger, run_date, status, finished_at, note) values ($1,$2,'skipped',now(),'Another run was already in progress.') returning id", [o.trigger, o.runDate])) as { id: number }[];
