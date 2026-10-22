@@ -86,6 +86,8 @@ export interface FlagNumbers {
   window_type: "perishable" | "standard";
   min_weeks: number;
   max_weeks: number;
+  recent_weeks: number; // window sizes, so reasons can say "last 4 weeks" without guessing
+  baseline_weeks: number;
   history_weeks: number;
   missing_weeks: number;
   triggers: JudgmentTrigger[]; // why it needs judgment (empty for other flags)
@@ -170,6 +172,8 @@ export function evaluateSku(input: SkuInput, runDate: string, s: RuleSettings): 
     window_type: perishable ? "perishable" : "standard",
     min_weeks: minWeeks,
     max_weeks: maxWeeks,
+    recent_weeks: s.recent_weeks,
+    baseline_weeks: s.baseline_weeks,
     history_weeks: historyWeeks,
     missing_weeks: missingWeeks,
     triggers,
