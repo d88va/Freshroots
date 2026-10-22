@@ -14,6 +14,7 @@
     "backtest": "tsx --env-file=.env.local scripts/run-backtest.ts",
     "reasons:demo": "tsx --env-file=.env.local scripts/demo-reasons.ts",
     "run:now": "tsx --env-file=.env.local scripts/run-now.ts",
+    "reasons:fill": "tsx --env-file=.env.local scripts/fill-reasons.ts",
     "rules:dry": "tsx --env-file=.env.local scripts/run-rules.ts"
   },
   "dependencies": {
