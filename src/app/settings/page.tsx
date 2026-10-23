@@ -3,6 +3,8 @@ import { RULE_LABELS, RULE_FIELDS } from "@/lib/rules/settings";
 import { PROJECT_FIELDS } from "@/lib/kill/settings";
 import { getPauseState } from "@/lib/run/state";
 import { PauseCard, ProjectForm, RulesForm } from "./SettingsForms";
+import { zohoFromEnv } from "@/lib/zoho/client";
+import ZohoCard from "./ZohoCard";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +19,7 @@ export default async function Settings() {
   const projectLog = (await sql.query("select id, saved_at, saved_by, changes, reason from project_setting_log order by id desc limit 8")) as typeof versions;
   const pauseLog = (await sql.query("select action, at, reason from pause_log order by id desc limit 10")) as { action: string; at: string; reason: string }[];
   const [latestVersion] = (await sql.query("select max(id)::int as v from rule_versions")) as { v: number }[];
+  const zoho = zohoFromEnv();
   const label = (k: string) => RULE_LABELS[k] ?? PROJECT_FIELDS.find((f) => f.key === k)?.label ?? k;
 
   return (
@@ -26,6 +29,9 @@ export default async function Settings() {
 
       <h2 style={{ marginTop: 28 }}>System</h2>
       <PauseCard paused={state.paused} since={state.paused_at} why={state.paused_reason} />
+
+      <h2>Zoho</h2>
+      <ZohoCard configured={zoho !== null} dc={zoho?.dc ?? ""} orgId={zoho?.orgId ?? ""} vendorId={zoho?.vendorId ?? ""} autoCreate={zoho?.autoCreateItems ?? false} />
 
       <h2>Rules (current version {latestVersion.v})</h2>
       <p className="muted" style={{ marginTop: 0 }}>Saving creates a new rule version, used from the next run. The feedback loop can only suggest changes; it cannot save one.</p>

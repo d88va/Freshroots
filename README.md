@@ -7,7 +7,8 @@ Raghav Kulkarni, the Senior Demand Planner, used to spend two days a month pulli
 This system applies Raghav's documented rules to every SKU every Monday and Thursday morning, flags what needs action, and puts the flags in front of him. **He approves, edits or overrides each one. Procurement only orders what he approved.** The system also learns from his decisions and shows him where the rules may need to change. **He decides.**
 
 > **Read this first: what is real and what is not.**
-> - There is **no live SAP or Zoho connection**. Data comes from CSV files. The Zoho step is a **mock**: approved orders appear on the Orders page and can be downloaded as a CSV, marked "sent to Zoho (mock)". Nothing is ever sent anywhere.
+> - There is **no live SAP connection**. SAP data comes from CSV files.
+> - **Zoho has two modes.** By default it is a **mock**: approved orders are listed on the Orders page, can be downloaded as a CSV, and are marked "sent to Zoho (mock)". Nothing is sent anywhere. If you add the `ZOHO_` settings (see "Connecting Zoho"), a **Send to Zoho** button creates **one draft purchase order** in Zoho Inventory from the orders Raghav approved. The system never issues it: procurement reviews and places it in Zoho.
 > - The demo data is **synthetic**: 400 invented SKUs, 3 years of invented sales, and invented past decisions. It proves the machinery works. It does not prove Raghav's rules work at Freshroots. That needs real exports (see "Swapping in real data").
 > - The app has **no login**, by decision. Anyone with the URL can use it. Keep the URL private.
 
@@ -18,7 +19,7 @@ This system applies Raghav's documented rules to every SKU every Monday and Thur
 | Boundary | What it means | Where it lives |
 |---|---|---|
 | **1. The Cut** | Every number and every flag is computed in plain code. The AI never calculates, never changes a flag, never removes one. It only writes a one-line reason for a flag whose numbers are already computed. | `src/lib/rules/engine.ts` (pure functions, no database, no AI). `src/lib/reasons/` (the AI is only handed finished numbers). |
-| **2. Human gate: orders** | The system never places an order. Nothing reaches the Orders page unless Raghav approved or edited it. "Needs judgment" flags can never be bulk-approved. | `src/lib/review/decide.ts`, enforced again by the server in `src/app/api/flags/`. |
+| **2. Human gate: orders** | The system never places an order. Nothing reaches the Orders page, or Zoho, unless Raghav approved or edited it. "Needs judgment" flags can never be bulk-approved. Zoho only ever receives a **draft** purchase order. | `src/lib/review/decide.ts`, enforced again by the server in `src/app/api/flags/`. The Zoho client (`src/lib/zoho/client.ts`) has no function that issues, approves or deletes a purchase order. |
 | **3. Human gate: rules** | The system never edits its own rules, thresholds or season factors. Feedback produces suggestions only. A rule changes only when Raghav accepts or edits a suggestion, or edits it on the Settings page. That saves a new rule version, used from the next run. | `src/lib/rules/settings.ts` (the only code that writes a rule), `src/lib/feedback/resolve.ts`. |
 
 **How the AI is kept inside the cut.** Gemini Flash is shown one flag at a time, as plain-English facts the rules already computed. Its sentence is then checked in code. It is thrown away, and a template written by code is used instead, if it contains any number that was not in the input (including numbers written as words), is more than one sentence, uses markdown, claims an order was placed, or contradicts the flag. If Gemini is down, slow, out of quota or has no key, every flag simply gets the template reason. The system works the same. Every flag records who wrote its reason (`reason_source`: ai or template) and why a template was used (`reason_fallback`). Every attempt, including rejected ones, is logged in `reason_attempts`.
@@ -31,7 +32,7 @@ This system applies Raghav's documented rules to every SKU every Monday and Thur
 2. **Run** (Monday and Thursday 07:00 IST, or the Run now button): the rules engine looks at every SKU and raises flags. Each flag carries every number behind it.
 3. **Reasons**: each flag gets a template reason straight away, then Gemini upgrades as many as the daily allowance allows, most urgent first.
 4. **Review** (Raghav): approve, edit the quantity, or override with a one-tap reason tag. Needs-judgment flags are in their own section, decided one at a time.
-5. **Orders**: only approved or edited flags. CSV download. "Sent to Zoho (mock)".
+5. **Orders**: only approved or edited flags. CSV download. In mock mode "sent to Zoho (mock)"; when Zoho is connected, a **Send to Zoho** button creates a draft purchase order.
 6. **Feedback**: a daily job (07:30 IST) checks decisions that are 28 or more days old. A Feedback page summarises them. When a rule is overridden often, or a reason keeps coming back, a suggestion card appears.
 7. **Rules**: Raghav accepts, edits or dismisses a suggestion, or edits the rules directly on Settings. Each save is a new, versioned rule. Every run records which version it used.
 8. **Kill criteria** (Metrics page): four stop signals that only ever show status.
@@ -41,7 +42,7 @@ This system applies Raghav's documented rules to every SKU every Monday and Thur
 | Page | What it is for |
 |---|---|
 | Review | Pending flags by urgency. Approve, edit, override. Thumbs on the AI reason. "Approve all" (with a confirm dialog) never includes needs-judgment flags. |
-| Orders | Approved orders only. CSV. Mock Zoho. Paused orders listed separately. |
+| Orders | Approved orders from the last 14 days ("show all" for the rest). CSV. Mock Zoho, or **Send to Zoho as a draft** when connected. Paused orders listed separately. |
 | Runs | Run history, Run now, next scheduled run, why running twice never doubles a flag. |
 | Season calendar | Active season factors, a learned monthly demand index per category beside the factor, suggestion cards for sharp gaps, and an event log (festivals, own schemes, competitor schemes). Display only. |
 | Feedback | Outcome checks, monthly summary by rule, tag and category, suggestions with accept, edit, dismiss, and the rule version history. |
@@ -132,11 +133,31 @@ npm test                               # 184 tests
 | `npm run backtest` | Replays the rules over history |
 | `npm run reasons:demo` / `reasons:fill` | Try the AI reasons / fill pending ones |
 | `npm run feedback:check` | The outcome check and suggestions, as the daily job does |
+| `npm run zoho:token -- --code <code>` | Turns the one-time code from the Zoho API Console into a refresh token, saved to `.env.local` (never printed) |
+| `npm run zoho:test` | Checks the Zoho connection (signs in, reads the organisation name, changes nothing) |
+| `npm run zoho:selftest` | Safety check of the send logic against the real database with a fake Zoho. It proves an order is never sent twice, and an overridden or old order is never sent |
 | `npm run demo:reset -- --yes` | Puts the demo back to a clean starting state (**read the warning in the file first**) |
 
 ### The schedule
 
 `vercel.json` holds two jobs: the rules run at `30 1 * * 1,4` (07:00 IST every Monday and Thursday, because Vercel Cron runs in UTC) and the outcome check at `0 2 * * *` (07:30 IST daily). Both calls need the `CRON_SECRET`. On Vercel's free Hobby plan, scheduled jobs may fire anywhere within the scheduled hour, so "07:00" can be up to an hour late.
+
+---
+
+## Connecting Zoho
+
+Without any setup the app runs in mock mode. To send approved orders to Zoho Inventory as **draft purchase orders**:
+
+1. **Account.** Sign up for Zoho Inventory (a free trial is enough for a demo) at the data centre for your region (India is `in`). Create an organisation and one vendor (Purchases, Vendors, New) for the drafts to be made out to.
+2. **Three ids.** The **organisation id** is in Settings, Organization Profile. The **vendor id** is the number in the vendor's page address. The **data centre** is the ending of your Zoho address (`in` for zoho.in).
+3. **API credentials.** Open the Zoho API Console for your data centre (api-console.zoho.in for India), Add Client, choose **Self Client**, and copy the **client id and secret**. On the Generate Code tab use the scope `ZohoInventory.purchaseorders.CREATE,ZohoInventory.purchaseorders.READ,ZohoInventory.items.CREATE,ZohoInventory.items.READ,ZohoInventory.contacts.READ,ZohoInventory.settings.READ` and a 10-minute duration, and copy the code.
+4. **Refresh token.** Put `ZOHO_DC`, `ZOHO_CLIENT_ID` and `ZOHO_CLIENT_SECRET` in `.env.local`, then run `npm run zoho:token -- --code <the code>` within a few minutes. The code works once.
+5. **The rest.** Add `ZOHO_ORG_ID` and `ZOHO_VENDOR_ID`. For a trial, also `ZOHO_AUTO_CREATE_ITEMS=true`, which creates a Zoho item for any SKU that is missing. Leave it off for a real Zoho, where the items already exist and a missing one is reported, not invented.
+6. **Check.** `npm run zoho:test` should print the organisation name. On Vercel, add the same `ZOHO_` variables and redeploy, then press **Test connection** on the Settings page.
+
+**What a send does.** On the Orders page, **Send N to Zoho as a draft** opens a confirm dialog. Confirming creates **one draft purchase order** with a line per order, matching each SKU to a Zoho item by its SKU. It is a draft: nothing is issued. An order is sent at most once (a database claim, safe even if two people click at the same moment), only orders approved or edited in the last 14 days are eligible, at most 50 lines go in one send, and sending is blocked while the system is paused. An order that cannot be sent, for example because its item is missing in Zoho, is marked failed and retried on the next send.
+
+**Not done, on purpose.** There is no code that issues, approves or deletes a purchase order. Reading open purchase orders and standard quantities from Zoho is not built: those still come from the CSV import.
 
 ---
 
@@ -198,7 +219,7 @@ Either way, the new value is validated first (for example the stockout limit mus
 - No password anywhere (your decision). Resuming from a pause needs a typed reason instead of a password.
 - Season calendar is a table of dated events, with the season months and uplift as settings.
 - The feedback tag column is named `decision_tag`, because it applies to approve and edit too.
-- Added: the 7-day hold-back after a decision, the chance baseline and flag load on the backtest, an import log, a per-key daily Gemini allowance, and the run date override.
+- Added: the Zoho draft purchase order connection (opt-in), the 7-day hold-back after a decision, the chance baseline and flag load on the backtest, an import log, a per-key daily Gemini allowance, and the run date override.
 - Upgraded to Next.js 16 and React 19, because every earlier version has known security advisories.
 
 ## Project layout
