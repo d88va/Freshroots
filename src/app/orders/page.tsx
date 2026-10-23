@@ -1,14 +1,17 @@
+import Link from "next/link";
 import { getSql } from "@/lib/db/client";
-import { ordersList, pausesList } from "@/lib/review/data";
+import { RECENT_DAYS, orderTotals, ordersList, pausesList } from "@/lib/review/data";
 import { TAG_LABELS, type Tag } from "@/lib/review/decide";
 
 export const dynamic = "force-dynamic";
 
 const when = (d: unknown) => new Date(d as string).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" });
 
-export default async function Orders() {
+export default async function Orders({ searchParams }: { searchParams: Promise<{ all?: string }> }) {
+  const all = (await searchParams).all === "1";
   const sql = getSql();
-  const [orders, pauses] = await Promise.all([ordersList(sql), pausesList(sql)]);
+  const [orders, pauses, totals] = await Promise.all([ordersList(sql, all), pausesList(sql, all), orderTotals(sql)]);
+  const hidden = totals.all - totals.recent;
   const units = orders.reduce((a, o) => a + (o.final_qty ?? 0), 0);
   return (
     <>
@@ -21,10 +24,14 @@ export default async function Orders() {
 
       <div className="sectionhead">
         <h2>Approved orders ({orders.length}{orders.length ? `, ${units.toLocaleString("en-IN")} units` : ""})</h2>
-        {orders.length > 0 && <a href="/api/orders/csv" download><button>Download CSV</button></a>}
+        {orders.length > 0 && <a href={`/api/orders/csv${all ? "?all=1" : ""}`} download><button>Download CSV</button></a>}
       </div>
+      <p className="muted" style={{ margin: "-4px 0 12px" }}>
+        {all ? `Showing every order, ${totals.all} in total.` : `Showing the last ${RECENT_DAYS} days.`}{" "}
+        {all ? <Link href="/orders">Show only the last {RECENT_DAYS} days</Link> : hidden > 0 ? <Link href="/orders?all=1">Show all {totals.all} orders ({hidden} older)</Link> : null}
+      </p>
       {orders.length === 0 ? (
-        <div className="card empty">No approved orders yet. Approve a flag on the Review page and it will appear here.</div>
+        <div className="card empty">{all ? "No approved orders yet." : `No orders in the last ${RECENT_DAYS} days.`} Approve a flag on the Review page and it will appear here.</div>
       ) : (
         <div className="card" style={{ overflowX: "auto" }}>
           <table>

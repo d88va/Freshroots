@@ -27,12 +27,22 @@ export async function pendingFlags(sql: Sql): Promise<ReviewFlag[]> {
               coalesce((f.numbers->>'weeks_of_stock')::numeric, 999), f.sku_id`));
 }
 
-export async function ordersList(sql: Sql): Promise<ReviewFlag[]> {
-  return fix(await sql.query(`select ${COLUMNS} from flags f join skus s using (sku_id) where f.status in ('approved','edited') and f.final_qty > 0 order by f.decided_at desc, f.sku_id`));
+export const RECENT_DAYS = 14;
+const since = (all?: boolean) => (all ? "" : `and f.decided_at > now() - interval '${RECENT_DAYS} days'`);
+
+/** Approved or edited orders. By default only the last 14 days, so the list is what procurement needs now. */
+export async function ordersList(sql: Sql, all = false): Promise<ReviewFlag[]> {
+  return fix(await sql.query(`select ${COLUMNS} from flags f join skus s using (sku_id) where f.status in ('approved','edited') and f.final_qty > 0 ${since(all)} order by f.decided_at desc, f.sku_id`));
 }
 
-export async function pausesList(sql: Sql): Promise<ReviewFlag[]> {
-  return fix(await sql.query(`select ${COLUMNS} from flags f join skus s using (sku_id) where f.status = 'approved' and f.final_qty is null order by f.decided_at desc, f.sku_id`));
+export async function pausesList(sql: Sql, all = false): Promise<ReviewFlag[]> {
+  return fix(await sql.query(`select ${COLUMNS} from flags f join skus s using (sku_id) where f.status = 'approved' and f.final_qty is null ${since(all)} order by f.decided_at desc, f.sku_id`));
+}
+
+/** How many orders exist in total, so the page can say how many it is not showing. */
+export async function orderTotals(sql: Sql): Promise<{ all: number; recent: number }> {
+  const [r] = (await sql.query(`select count(*)::int as a, count(*) filter (where decided_at > now() - interval '${RECENT_DAYS} days')::int as r from flags where status in ('approved','edited') and final_qty > 0`)) as { a: number; r: number }[];
+  return { all: r.a, recent: r.r };
 }
 
 export async function decidedFlags(sql: Sql, status?: string): Promise<ReviewFlag[]> {
