@@ -10,10 +10,12 @@ export const dynamic = "force-dynamic";
 
 const when = (d: unknown) => new Date(d as string).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" });
 
-export default async function Orders({ searchParams }: { searchParams: Promise<{ all?: string }> }) {
-  const all = (await searchParams).all === "1";
+export default async function Orders({ searchParams }: { searchParams: Promise<{ all?: string; q?: string }> }) {
+  const sp = await searchParams;
+  const all = sp.all === "1";
+  const q = (sp.q ?? "").slice(0, 60);
   const sql = getSql();
-  const [orders, pauses, totals] = await Promise.all([ordersList(sql, all), pausesList(sql, all), orderTotals(sql)]);
+  const [orders, pauses, totals] = await Promise.all([ordersList(sql, all, q), pausesList(sql, all), orderTotals(sql)]);
   const hidden = totals.all - totals.recent;
   const live = zohoFromEnv() !== null;
   const unsent = live ? await unsentCount(sql) : 0;
@@ -32,8 +34,8 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
   const units = orders.reduce((a, o) => a + (o.final_qty ?? 0), 0);
   return (
     <>
-      <h1>Orders</h1>
-      <p className="lead">Only flags Raghav approved or edited appear here. Nothing else can reach this list.</p>
+      <h1>Purchase orders</h1>
+      <p className="lead">Every order Raghav approved or edited, one line each. Only approved orders appear here. Nothing else can reach this list.</p>
       {live ? (
         <div className="notice" style={{ background: "var(--soft-info)" }}>
           <strong>Connected to Zoho Inventory.</strong> “Send to Zoho” creates a <strong>draft</strong> purchase order from the orders you approved. It is never issued by this system: procurement reviews and places it in Zoho. The CSV download still works.
@@ -49,15 +51,28 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
         <h2>Approved orders ({orders.length}{orders.length ? `, ${units.toLocaleString("en-IN")} units` : ""})</h2>
         <div className="row" style={{ gap: 8 }}>
           {live && <ZohoSend unsent={unsent} cap={SEND_CAP} />}
-          {orders.length > 0 && <a href={`/api/orders/csv${all ? "?all=1" : ""}`} download><button className={live ? "secondary" : ""}>Download CSV</button></a>}
+          {orders.length > 0 && <a href={`/api/orders/csv?${new URLSearchParams({ ...(all ? { all: "1" } : {}), ...(q ? { q } : {}) })}`} download><button className={live ? "secondary" : ""}>Download CSV</button></a>}
         </div>
       </div>
-      <p className="muted" style={{ margin: "-4px 0 12px" }}>
-        {all ? `Showing every order, ${totals.all} in total.` : `Showing the last ${RECENT_DAYS} days.`}{" "}
-        {all ? <Link href="/orders">Show only the last {RECENT_DAYS} days</Link> : hidden > 0 ? <Link href="/orders?all=1">Show all {totals.all} orders ({hidden} older)</Link> : null}
+      <div className="row no-print" style={{ justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div className="tabs" role="tablist" aria-label="Which orders" style={{ margin: 0, borderBottom: 0 }}>
+          <Link role="tab" aria-selected={!all} href={q ? `/orders?q=${encodeURIComponent(q)}` : "/orders"} className={`tab${!all ? " active" : ""}`}>Last {RECENT_DAYS} days<span className="n">{totals.recent}</span></Link>
+          <Link role="tab" aria-selected={all} href={`/orders?all=1${q ? `&q=${encodeURIComponent(q)}` : ""}`} className={`tab${all ? " active" : ""}`}>All orders<span className="n">{totals.all}</span></Link>
+        </div>
+        <form action="/orders" method="get" className="row" style={{ gap: 8 }}>
+          {all && <input type="hidden" name="all" value="1" />}
+          <input type="text" name="q" defaultValue={q} placeholder="Search SKU or product" aria-label="Search SKU or product" style={{ width: 220 }} />
+          <button className="secondary" type="submit">Search</button>
+          {q && <Link href={all ? "/orders?all=1" : "/orders"} className="muted">Clear</Link>}
+        </form>
+      </div>
+      <div style={{ borderBottom: "1px solid var(--line)", marginBottom: 12 }} />
+      <p className="muted" style={{ margin: "0 0 12px" }}>
+        {q ? `Showing ${orders.length} order${orders.length === 1 ? "" : "s"} matching “${q}” ` : `Showing ${orders.length} order${orders.length === 1 ? "" : "s"} `}
+        {all ? "from the whole history." : hidden > 0 ? `from the last ${RECENT_DAYS} days. ${hidden} older ones are under “All orders”.` : `from the last ${RECENT_DAYS} days.`}
       </p>
       {orders.length === 0 ? (
-        <div className="card empty">{all ? "No approved orders yet." : `No orders in the last ${RECENT_DAYS} days.`} Approve a flag on the Review page and it will appear here.</div>
+        <div className="card empty">{q ? `No orders match “${q}”.` : all ? "No approved orders yet." : `No orders in the last ${RECENT_DAYS} days.`} {!q && "Approve a flag on the Review page and it will appear here."}</div>
       ) : (
         <div className="card" style={{ overflowX: "auto" }}>
           <table>

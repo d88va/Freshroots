@@ -219,3 +219,4 @@ tbody tr:last-child td { border-bottom: 0; }
 .fr-sig.warn { color: var(--warn); }
 .meter i.ok { background: var(--good); }
 .fr-detail .edit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tab { text-decoration: none; }

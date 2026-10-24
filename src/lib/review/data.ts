@@ -30,9 +30,13 @@ export async function pendingFlags(sql: Sql): Promise<ReviewFlag[]> {
 export const RECENT_DAYS = 14;
 const since = (all?: boolean) => (all ? "" : `and f.decided_at > now() - interval '${RECENT_DAYS} days'`);
 
-/** Approved or edited orders. By default only the last 14 days, so the list is what procurement needs now. */
-export async function ordersList(sql: Sql, all = false): Promise<ReviewFlag[]> {
-  return fix(await sql.query(`select ${COLUMNS} from flags f join skus s using (sku_id) where f.status in ('approved','edited') and f.final_qty > 0 ${since(all)} order by f.decided_at desc, f.sku_id`));
+/** Approved or edited orders. By default only the last 14 days; `all` includes the whole history; `q` searches SKU and product name. */
+export async function ordersList(sql: Sql, all = false, q = ""): Promise<ReviewFlag[]> {
+  const search = q.trim();
+  return fix(await sql.query(
+    `select ${COLUMNS} from flags f join skus s using (sku_id)
+      where f.status in ('approved','edited') and f.final_qty > 0 ${since(all)} ${search ? "and (s.sku_id ilike $1 or s.name ilike $1)" : ""}
+      order by f.decided_at desc, f.sku_id`, search ? [`%${search}%`] : []));
 }
 
 export async function pausesList(sql: Sql, all = false): Promise<ReviewFlag[]> {

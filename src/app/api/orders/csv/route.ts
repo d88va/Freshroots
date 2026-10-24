@@ -8,9 +8,11 @@ const esc = (v: unknown) => { const s = String(v ?? ""); return /[",\n]/.test(s)
 
 // Approved orders only. By default the last 14 days; add ?all=1 for everything. Stands in for the Zoho purchase-order import: this build does not talk to Zoho.
 export async function GET(req: Request) {
-  const all = new URL(req.url).searchParams.get("all") === "1";
+  const url = new URL(req.url);
+  const all = url.searchParams.get("all") === "1";
+  const q = (url.searchParams.get("q") ?? "").slice(0, 60);
   const sql = getSql();
-  const rows = await ordersList(sql, all);
+  const rows = await ordersList(sql, all, q);
   const live = zohoFromEnv() !== null;
   const sync = new Map<number, string>();
   if (live && rows.length) for (const r of (await sql.query("select flag_id, status, po_number from zoho_sync where flag_id = any($1::bigint[])", [rows.map((o) => o.id)])) as { flag_id: number; status: string; po_number: string | null }[]) sync.set(Number(r.flag_id), r.status === "sent" ? `draft ${r.po_number} in Zoho` : r.status);
