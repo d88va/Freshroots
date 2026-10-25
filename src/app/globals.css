@@ -227,12 +227,14 @@ tbody tr:last-child td { border-bottom: 0; }
 .seg a + a { border-left: 1px solid var(--line); }
 .seg a:hover { background: var(--hover); }
 .seg a.on { background: var(--active); color: var(--ink); font-weight: 600; }
-.po-list { display: grid; grid-template-columns: minmax(0, 1.5fr) 150px 80px 110px minmax(0, 1.4fr); gap: 16px; align-items: center; padding: 14px 20px; border-top: 1px solid var(--hair); text-decoration: none; color: inherit; }
+.po-list { display: grid; grid-template-columns: 170px 150px 60px 90px minmax(150px, 1fr) 96px; gap: 16px; align-items: center; padding: 14px 20px; border-top: 1px solid var(--hair); text-decoration: none; color: inherit; }
 .po-list:hover { background: var(--raised); }
 .po-list.head { height: 36px; padding-top: 0; padding-bottom: 0; border-top: 0; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
 .po-list.head:hover { background: none; }
+.po-cta { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; height: 32px; padding: 0 14px; border-radius: 6px; background: var(--brand); color: var(--on-brand); font-size: 13px; font-weight: 500; }
+.po-list:hover .po-cta { filter: brightness(1.12); }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
-@media (max-width: 899px) { .po-list { grid-template-columns: 1fr 1fr; gap: 4px 16px; padding: 14px 16px; } .po-list.head { display: none; } .num { text-align: left; } }
+@media (max-width: 1099px) { .po-list .num[data-l]::after { content: attr(data-l); color: var(--muted); } .po-cta { grid-column: 1 / -1; } .po-list { grid-template-columns: 1fr 1fr; gap: 4px 16px; padding: 14px 16px; } .po-list.head { display: none; } .num { text-align: left; } }
 
 /* ---------- the purchase order document (invoice format). Always light, like paper. ---------- */
 .invoice { max-width: 860px; margin: 0 auto 32px; padding: 48px 56px; background: #ffffff; color: #1c2434; border: 1px solid #e1e5ec; border-radius: 10px; font-size: 13px; line-height: 19px; }

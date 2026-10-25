@@ -152,14 +152,15 @@ function PoTab({ poDays, live }: { poDays: { date: string; lines: number; units:
       ) : (
         <div className="panel">
           <div className="inner" style={{ minWidth: 0 }}>
-            <div className="po-list head"><span>Purchase order</span><span>Date</span><span className="num">Lines</span><span className="num">Units</span><span>Zoho</span></div>
+            <div className="po-list head"><span>Purchase order</span><span>Date</span><span className="num">Lines</span><span className="num">Units</span><span>Zoho</span><span></span></div>
             {poDays.map((p) => (
               <Link key={p.date} href={`/orders/po/${p.date}`} className="po-list">
                 <span><b>{poNumberForDate(p.date)}</b></span>
                 <span className="muted">{day(p.date)}</span>
-                <span className="num">{p.lines}</span>
-                <span className="num">{p.units.toLocaleString("en-IN")}</span>
+                <span className="num" data-l=" lines">{p.lines}</span>
+                <span className="num" data-l=" units">{p.units.toLocaleString("en-IN")}</span>
                 <span>{live ? <span className="muted">See Approved orders</span> : <span className="pill good">sent to Zoho (mock)</span>}</span>
+                <span className="po-cta">Open PO</span>
               </Link>
             ))}
           </div>
