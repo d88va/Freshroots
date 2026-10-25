@@ -42,7 +42,7 @@ This system applies Raghav's documented rules to every SKU every Monday and Thur
 | Page | What it is for |
 |---|---|
 | Review | Pending flags by urgency. Approve, edit, override. Thumbs on the AI reason. "Approve all" (with a confirm dialog) never includes needs-judgment flags. |
-| Orders | Approved orders from the last 14 days ("show all" for the rest). CSV. Mock Zoho, or **Send to Zoho as a draft** when connected. Paused orders listed separately. |
+| Orders | Two tabs. **Approved orders**: the last 14 days ("show all" for the rest). CSV. Mock Zoho, or **Send to Zoho as a draft** when connected. Paused orders listed separately. **Purchase orders**: one invoice-style document per approval day (`/orders/po/<date>`), printable as a PDF, with a per-PO CSV. Derived from approved orders; no prices or suppliers are invented. |
 | Runs | Run history, Run now, next scheduled run, why running twice never doubles a flag. |
 | Season calendar | Active season factors, a learned monthly demand index per category beside the factor, suggestion cards for sharp gaps, and an event log (festivals, own schemes, competitor schemes). Display only. |
 | Feedback | Outcome checks, monthly summary by rule, tag and category, suggestions with accept, edit, dismiss, and the rule version history. |

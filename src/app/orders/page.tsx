@@ -5,19 +5,55 @@ import { zohoFromEnv } from "@/lib/zoho/client";
 import { SEND_CAP, unsentCount } from "@/lib/zoho/send";
 import ZohoSend from "./ZohoSend";
 import { TAG_LABELS, type Tag } from "@/lib/review/decide";
+import { listPoDays } from "@/lib/po/data";
+import { poNumberForDate } from "@/lib/po/format";
 
 export const dynamic = "force-dynamic";
 
+const day = (iso: string) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-IN", { timeZone: "UTC", weekday: "short", day: "numeric", month: "short", year: "numeric" });
 const when = (d: unknown) => new Date(d as string).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" });
 
-export default async function Orders({ searchParams }: { searchParams: Promise<{ all?: string; q?: string }> }) {
+export default async function Orders({ searchParams }: { searchParams: Promise<{ all?: string; q?: string; tab?: string }> }) {
   const sp = await searchParams;
+  const tab = sp.tab === "po" ? "po" : "orders";
   const all = sp.all === "1";
   const q = (sp.q ?? "").slice(0, 60);
   const sql = getSql();
-  const [orders, pauses, totals] = await Promise.all([ordersList(sql, all, q), pausesList(sql, all), orderTotals(sql)]);
-  const hidden = totals.all - totals.recent;
   const live = zohoFromEnv() !== null;
+  const [totals, poDays] = await Promise.all([orderTotals(sql), listPoDays(sql)]);
+
+  return (
+    <>
+      <h1>Orders</h1>
+      <p className="lead">Only orders Raghav approved or edited appear here. Nothing else can reach these lists, and this system places no order: procurement places it.</p>
+
+      <div className="tabs no-print" role="tablist" aria-label="Orders" style={{ marginTop: 0 }}>
+        <Link role="tab" aria-selected={tab === "orders"} href="/orders" className={`tab${tab === "orders" ? " active" : ""}`}>Approved orders<span className="n">{totals.all}</span></Link>
+        <Link role="tab" aria-selected={tab === "po"} href="/orders?tab=po" className={`tab${tab === "po" ? " active" : ""}`}>Purchase orders<span className="n">{poDays.length}</span></Link>
+      </div>
+
+      {tab === "orders" ? await OrdersTab({ all, q, live, totals }) : PoTab({ poDays, live })}
+    </>
+  );
+}
+
+function ZohoBanner({ live }: { live: boolean }) {
+  return live ? (
+    <div className="notice" style={{ background: "var(--soft-info)" }}>
+      <strong>Connected to Zoho Inventory.</strong> “Send to Zoho” creates a <strong>draft</strong> purchase order from the orders you approved. It is never issued by this system: procurement reviews and places it in Zoho. The CSV download still works.
+    </div>
+  ) : (
+    <div className="notice">
+      <strong>Zoho is mocked.</strong> This is not a live integration. Approved orders are listed here and can be downloaded as a CSV
+      in place of a purchase-order import. Every row is marked “sent to Zoho (mock)”. No order is placed anywhere.
+    </div>
+  );
+}
+
+async function OrdersTab({ all, q, live, totals }: { all: boolean; q: string; live: boolean; totals: { all: number; recent: number } }) {
+  const sql = getSql();
+  const [orders, pauses] = await Promise.all([ordersList(sql, all, q), pausesList(sql, all)]);
+  const hidden = totals.all - totals.recent;
   const unsent = live ? await unsentCount(sql) : 0;
   const sync = new Map<number, { status: string; po_number: string | null; error: string | null }>();
   if (live && orders.length) {
@@ -32,32 +68,16 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
     return <span className="pill">Not sent yet</span>;
   };
   const units = orders.reduce((a, o) => a + (o.final_qty ?? 0), 0);
+  const qs = (extra: Record<string, string>) => new URLSearchParams({ ...extra, ...(q ? { q } : {}) }).toString();
+
   return (
     <>
-      <h1>Purchase orders</h1>
-      <p className="lead">Every order Raghav approved or edited, one line each. Only approved orders appear here. Nothing else can reach this list.</p>
-      {live ? (
-        <div className="notice" style={{ background: "var(--soft-info)" }}>
-          <strong>Connected to Zoho Inventory.</strong> “Send to Zoho” creates a <strong>draft</strong> purchase order from the orders you approved. It is never issued by this system: procurement reviews and places it in Zoho. The CSV download still works.
-        </div>
-      ) : (
-        <div className="notice">
-          <strong>Zoho is mocked.</strong> This is not a live integration. Approved orders are listed here and can be downloaded as a CSV
-          in place of a purchase-order import. Every row is marked “sent to Zoho (mock)”. No order is placed anywhere.
-        </div>
-      )}
+      <div style={{ marginTop: 20 }}><ZohoBanner live={live} /></div>
 
-      <div className="sectionhead">
-        <h2>Approved orders ({orders.length}{orders.length ? `, ${units.toLocaleString("en-IN")} units` : ""})</h2>
-        <div className="row" style={{ gap: 8 }}>
-          {live && <ZohoSend unsent={unsent} cap={SEND_CAP} />}
-          {orders.length > 0 && <a href={`/api/orders/csv?${new URLSearchParams({ ...(all ? { all: "1" } : {}), ...(q ? { q } : {}) })}`} download><button className={live ? "secondary" : ""}>Download CSV</button></a>}
-        </div>
-      </div>
-      <div className="row no-print" style={{ justifyContent: "space-between", alignItems: "flex-end" }}>
-        <div className="tabs" role="tablist" aria-label="Which orders" style={{ margin: 0, borderBottom: 0 }}>
-          <Link role="tab" aria-selected={!all} href={q ? `/orders?q=${encodeURIComponent(q)}` : "/orders"} className={`tab${!all ? " active" : ""}`}>Last {RECENT_DAYS} days<span className="n">{totals.recent}</span></Link>
-          <Link role="tab" aria-selected={all} href={`/orders?all=1${q ? `&q=${encodeURIComponent(q)}` : ""}`} className={`tab${all ? " active" : ""}`}>All orders<span className="n">{totals.all}</span></Link>
+      <div className="row no-print" style={{ justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <div className="seg" role="group" aria-label="Which orders">
+          <Link href={`/orders${q ? `?${qs({})}` : ""}`} className={!all ? "on" : ""} aria-current={!all ? "true" : undefined}>Last {RECENT_DAYS} days ({totals.recent})</Link>
+          <Link href={`/orders?${qs({ all: "1" })}`} className={all ? "on" : ""} aria-current={all ? "true" : undefined}>All orders ({totals.all})</Link>
         </div>
         <form action="/orders" method="get" className="row" style={{ gap: 8 }}>
           {all && <input type="hidden" name="all" value="1" />}
@@ -66,11 +86,18 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
           {q && <Link href={all ? "/orders?all=1" : "/orders"} className="muted">Clear</Link>}
         </form>
       </div>
-      <div style={{ borderBottom: "1px solid var(--line)", marginBottom: 12 }} />
-      <p className="muted" style={{ margin: "0 0 12px" }}>
-        {q ? `Showing ${orders.length} order${orders.length === 1 ? "" : "s"} matching “${q}” ` : `Showing ${orders.length} order${orders.length === 1 ? "" : "s"} `}
-        {all ? "from the whole history." : hidden > 0 ? `from the last ${RECENT_DAYS} days. ${hidden} older ones are under “All orders”.` : `from the last ${RECENT_DAYS} days.`}
-      </p>
+
+      <div className="sectionhead" style={{ marginTop: 8 }}>
+        <p className="muted" style={{ margin: 0 }}>
+          {q ? `${orders.length} order${orders.length === 1 ? "" : "s"} matching “${q}”` : `${orders.length} order${orders.length === 1 ? "" : "s"}, ${units.toLocaleString("en-IN")} units`}
+          {all ? ", from the whole history." : hidden > 0 ? `, from the last ${RECENT_DAYS} days. ${hidden} older ones are under “All orders”.` : `, from the last ${RECENT_DAYS} days.`}
+        </p>
+        <div className="row" style={{ gap: 8 }}>
+          {live && <ZohoSend unsent={unsent} cap={SEND_CAP} />}
+          {orders.length > 0 && <a href={`/api/orders/csv?${new URLSearchParams({ ...(all ? { all: "1" } : {}), ...(q ? { q } : {}) })}`} download><button className={live ? "secondary" : ""}>Download CSV</button></a>}
+        </div>
+      </div>
+
       {orders.length === 0 ? (
         <div className="card empty">{q ? `No orders match “${q}”.` : all ? "No approved orders yet." : `No orders in the last ${RECENT_DAYS} days.`} {!q && "Approve a flag on the Review page and it will appear here."}</div>
       ) : (
@@ -97,7 +124,7 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
       {pauses.length > 0 && (
         <>
           <h2>Orders paused ({pauses.length})</h2>
-          <p className="muted" style={{ marginTop: 0 }}>Approved overstock flags: the next order for these SKUs is held. No quantity, so they are not in the CSV.</p>
+          <p className="muted" style={{ marginTop: 0 }}>Approved overstock flags: the next order for these SKUs is held. No quantity, so they are not in the CSV or on a purchase order.</p>
           <div className="card" style={{ overflowX: "auto" }}>
             <table>
               <thead><tr><th>SKU</th><th>Product</th><th>Stock</th><th>Weeks of stock</th><th>Approved</th></tr></thead>
@@ -109,6 +136,34 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
             </table>
           </div>
         </>
+      )}
+    </>
+  );
+}
+
+function PoTab({ poDays, live }: { poDays: { date: string; lines: number; units: number }[]; live: boolean }) {
+  return (
+    <>
+      <p className="muted" style={{ margin: "20px 0 12px", maxWidth: 720 }}>
+        One purchase order for each day Raghav approved orders, laid out as a document for procurement. Open one to read, print or save it as a PDF. A purchase order places no order: procurement places it.
+      </p>
+      {poDays.length === 0 ? (
+        <div className="card empty">No purchase orders yet. Approve a flag on the Review page and today’s purchase order will appear here.</div>
+      ) : (
+        <div className="panel">
+          <div className="inner" style={{ minWidth: 0 }}>
+            <div className="po-list head"><span>Purchase order</span><span>Date</span><span className="num">Lines</span><span className="num">Units</span><span>Zoho</span></div>
+            {poDays.map((p) => (
+              <Link key={p.date} href={`/orders/po/${p.date}`} className="po-list">
+                <span><b>{poNumberForDate(p.date)}</b></span>
+                <span className="muted">{day(p.date)}</span>
+                <span className="num">{p.lines}</span>
+                <span className="num">{p.units.toLocaleString("en-IN")}</span>
+                <span>{live ? <span className="muted">See Approved orders</span> : <span className="pill good">sent to Zoho (mock)</span>}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
       )}
     </>
   );

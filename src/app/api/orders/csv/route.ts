@@ -1,5 +1,7 @@
 import { getSql } from "@/lib/db/client";
 import { ordersList } from "@/lib/review/data";
+import { getPoLines } from "@/lib/po/data";
+import { isPoDate, poNumberForDate } from "@/lib/po/format";
 import { zohoFromEnv } from "@/lib/zoho/client";
 
 export const dynamic = "force-dynamic";
@@ -9,6 +11,21 @@ const esc = (v: unknown) => { const s = String(v ?? ""); return /[",\n]/.test(s)
 // Approved orders only. By default the last 14 days; add ?all=1 for everything. Stands in for the Zoho purchase-order import: this build does not talk to Zoho.
 export async function GET(req: Request) {
   const url = new URL(req.url);
+
+  // One purchase order (one day's approved orders): ?po=2026-10-23
+  const po = url.searchParams.get("po");
+  if (po !== null) {
+    if (!isPoDate(po)) return new Response("Not a valid purchase order date.", { status: 400 });
+    const lines = await getPoLines(getSql(), po);
+    if (!lines.length) return new Response("Purchase order not found.", { status: 404 });
+    const number = poNumberForDate(po);
+    const head = ["po_number", "line", "sku_id", "sku_name", "category", "quantity", "unit", "decision", "reason_tag", "zoho"];
+    const rowsCsv = lines.map((l, i) => [number, i + 1, l.sku_id, l.name, l.category, l.quantity, "units", l.status, l.decision_tag ?? "", "sent to Zoho (mock)"].map(esc).join(","));
+    return new Response([head.join(","), ...rowsCsv].join("\n") + "\n", {
+      headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="${number}.csv"` },
+    });
+  }
+
   const all = url.searchParams.get("all") === "1";
   const q = (url.searchParams.get("q") ?? "").slice(0, 60);
   const sql = getSql();

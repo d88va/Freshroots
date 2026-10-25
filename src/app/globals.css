@@ -220,3 +220,54 @@ tbody tr:last-child td { border-bottom: 0; }
 .meter i.ok { background: var(--good); }
 .fr-detail .edit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .tab { text-decoration: none; }
+
+/* ---------- orders: view switch and purchase order list ---------- */
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--card); }
+.seg a { padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; }
+.seg a + a { border-left: 1px solid var(--line); }
+.seg a:hover { background: var(--hover); }
+.seg a.on { background: var(--active); color: var(--ink); font-weight: 600; }
+.po-list { display: grid; grid-template-columns: minmax(0, 1.5fr) 150px 80px 110px minmax(0, 1.4fr); gap: 16px; align-items: center; padding: 14px 20px; border-top: 1px solid var(--hair); text-decoration: none; color: inherit; }
+.po-list:hover { background: var(--raised); }
+.po-list.head { height: 36px; padding-top: 0; padding-bottom: 0; border-top: 0; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.po-list.head:hover { background: none; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 899px) { .po-list { grid-template-columns: 1fr 1fr; gap: 4px 16px; padding: 14px 16px; } .po-list.head { display: none; } .num { text-align: left; } }
+
+/* ---------- the purchase order document (invoice format). Always light, like paper. ---------- */
+.invoice { max-width: 860px; margin: 0 auto 32px; padding: 48px 56px; background: #ffffff; color: #1c2434; border: 1px solid #e1e5ec; border-radius: 10px; font-size: 13px; line-height: 19px; }
+.invoice .soft { color: #5d6679; }
+.inv-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; padding-bottom: 24px; border-bottom: 2px solid #1c2434; }
+.inv-brand { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.inv-title { text-align: right; }
+.inv-title .t { font-size: 12px; letter-spacing: 0.12em; font-weight: 600; color: #5d6679; }
+.inv-title .n { font-size: 22px; line-height: 28px; font-weight: 600; }
+.inv-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 20px 0; border-bottom: 1px solid #e1e5ec; }
+.inv-label { font-size: 11px; line-height: 16px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; color: #5d6679; }
+.inv-val { margin-top: 2px; font-weight: 600; }
+.inv-parties { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 20px 0; }
+.inv-box { padding: 14px 16px; border: 1px solid #e1e5ec; border-radius: 6px; min-height: 80px; }
+.inv-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+.inv-table th { padding: 8px 10px; border-top: 1px solid #1c2434; border-bottom: 1px solid #1c2434; background: #f4f6f9; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; text-align: left; color: #1c2434; }
+.inv-table td { padding: 10px; border-bottom: 1px solid #e1e5ec; vertical-align: top; }
+.inv-table th.r, .inv-table td.r { text-align: right; font-variant-numeric: tabular-nums; }
+.inv-sum { display: flex; justify-content: flex-end; margin-top: 16px; }
+.inv-sum table { width: 320px; border-collapse: collapse; }
+.inv-sum td { padding: 5px 0 5px 12px; border: 0; }
+.inv-sum tr.total td { padding-top: 10px; border-top: 1px solid #1c2434; font-weight: 600; font-size: 15px; }
+.inv-notes { margin-top: 28px; padding-top: 16px; border-top: 1px solid #e1e5ec; }
+.inv-sign { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 56px; }
+.inv-sign div { padding-top: 8px; border-top: 1px solid #1c2434; font-size: 12px; color: #5d6679; }
+@media (max-width: 899px) { .invoice { padding: 24px 16px; } .inv-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); } .inv-parties, .inv-sign { grid-template-columns: 1fr; } .inv-title { text-align: left; } }
+@page { size: A4; margin: 14mm; }
+@media print {
+  .sidebar, .topbar, .banner, .scrim, .drawer, .no-print { display: none !important; }
+  body { background: #fff; }
+  .shell { display: block; }
+  .content { padding: 0; }
+  .content-inner { max-width: none; }
+  .invoice { max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; }
+  .inv-table thead { display: table-header-group; }
+  .inv-table tr { break-inside: avoid; }
+  .inv-sign, .inv-sum { break-inside: avoid; }
+}
